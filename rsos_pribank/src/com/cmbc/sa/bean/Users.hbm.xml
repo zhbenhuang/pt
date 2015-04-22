@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.cmbc.sa.bean.Users" table="users" schema="dbo" catalog="rsosdb_pbank">
+		<composite-id>
+			<key-property name="userId" type="java.lang.String">
+				<column name="userId" not-null="true"></column>
+			</key-property>
+			<key-property name="business" type="int">
+				<column name="business"></column>
+			</key-property>
+		</composite-id>
+ 		<property name="username" type="java.lang.String">
+			<column name="username"></column>
+		</property>
+		<property name="address" type="java.lang.String">
+			<column name="address"></column>
+		</property>
+		<property name="contact" type="java.lang.String">
+			<column name="contact"></column>
+		</property>
+		<property name="sex" type="java.lang.String">
+			<column name="sex"></column>
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="password"></column>
+		</property>
+		<property name="mail" type="java.lang.String">
+			<column name="mail"></column>
+		</property>
+		<property name="enabled" type="int">
+			<column name="enabled"></column>
+		</property>		
+		<property name="rank" type="int">
+			<column name="rank"></column>
+		</property>
+		<property name="departmentId" type="java.lang.String">
+			<column name="departmentId"></column>
+		</property>	
+		<property name="departmentName" type="java.lang.String">
+			<column name="departmentName"></column>
+		</property>		
+	</class>
+</hibernate-mapping>

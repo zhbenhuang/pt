@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+ 	<package name="Main" extends="json-default" namespace="">
+ 		<action name="login" class="com.cmbc.sa.action.MainAction">
+ 			<result name="success">/staff.jsp</result>
+ 			<result name="error">/login.jsp</result>
+ 			<result name="managerTasks">/flow/fdev/managerWaitDealTasks.jsp</result>
+ 			<result name="afterServiceTasks">/flow/fdev/afterServiceWaitDealTasks.jsp</result>
+ 			<result name="xweiTasks">/flow/fdev/xweiWaitDealTasks.jsp</result>
+ 			<result name="marketTasks">/flow/fdev/marketWaitDealTasks.jsp</result>
+ 			<result name="branchPresident">/flow/fdev/branchPresidentWaitDealTasks.jsp</result>
+ 			<result name="branchManager">/flow/pribank/branchWaitDealTasks.jsp</result>
+ 			<result name="contractMan">/flow/pribank/contractWaitDealTasks.jsp</result>
+ 			<result name="productManager">/flow/pribank/productWaitDealTasks.jsp</result>
+ 			<result name="afterServiceDep">/notice/afterServiceDep.jsp</result>
+ 			<result name="privateBankDep">/notice/privateBankDep.jsp</result>
+ 			<result name="reLogin">/reLogin.jsp</result>
+ 		</action>
+
+ 		<action name="validate" class="com.cmbc.sa.action.MainAction" method="validatePerson">
+ 			<result name="success">/staffMsg.jsp</result>
+ 			<result name="error">/login.jsp</result>
+ 		</action> 		
+ 		<action name="logout" class="com.cmbc.sa.action.MainAction" method="logout">
+ 			<result name="success">/login.jsp</result>
+ 		</action>
+ 		<action name="alterpassword" class="com.cmbc.sa.action.MainAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="showPermission" class="com.cmbc.sa.action.MainAction">
+ 			<result name="success">/right.jsp</result>
+ 		</action>
+ 	</package>
+ 	
+ 	<package name="user" namespace="" extends="json-default">
+ 		<action name="findUser" class="com.cmbc.sa.action.UserAction">
+ 			<result name="success" type="json"></result>
+ 		</action>	
+		<action name="queryUserList" class="com.cmbc.sa.action.UserAction">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="queryRoles" class="com.cmbc.sa.action.UserAction">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="saveUser" class="com.cmbc.sa.action.UserAction">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="modifyUser" class="com.cmbc.sa.action.UserAction">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="deleteUser" class="com.cmbc.sa.action.UserAction">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="saveUserRoles" class="com.cmbc.sa.action.UserAction">
+			<result name="success" type="json"></result>
+		</action>
+	</package>
+	
+	<package name="role" namespace="" extends="json-default">		
+		<action name="queryRoleList" class="com.cmbc.sa.action.RoleAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="getPermission" class="com.cmbc.sa.action.RoleAction">
+			<result name="success" type="json"></result>
+		</action>
+ 		<action name="saveRole" class="com.cmbc.sa.action.RoleAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="modifyRole" class="com.cmbc.sa.action.RoleAction">
+			<result name="success" type="json"></result>
+		</action>
+ 		<action name="deleteRole" class="com.cmbc.sa.action.RoleAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+		<action name="queryUsersByRole" class="com.cmbc.sa.action.RoleAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="savePermissions" class="com.cmbc.sa.action.RoleAction">
+			<result name="success" type="json"></result>
+		</action>
+	</package>
+ 	
+ 	<package name="department" namespace="" extends="json-default">
+		<action name="findDepartment" class="com.cmbc.sa.action.DepartmentAction" method="findDepartment">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="queryDepartmentList" class="com.cmbc.sa.action.DepartmentAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="getDepartment" class="com.cmbc.sa.action.DepartmentAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="deleteDepartment" class="com.cmbc.sa.action.DepartmentAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="saveDepartment" class="com.cmbc.sa.action.DepartmentAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="modifyDepartment" class="com.cmbc.sa.action.DepartmentAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="selectBranchs" class="com.cmbc.sa.action.DepartmentAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="departmentAction" class="com.cmbc.sa.action.DepartmentAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+	</package>
+</struts>

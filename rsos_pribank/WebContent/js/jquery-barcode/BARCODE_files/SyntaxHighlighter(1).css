@@ -1,0 +1,20 @@
+.dp-highlighter ol li,
+.dp-highlighter ol li.alt{
+	background-color: #FFFFFF;
+}
+
+.dp-highlighter.nogutter ol{
+	background-color: #FFFFFF;
+	padding: 10px 0;
+	border-left: 1px solid #C9C9C9;
+	border-right: 1px solid #C9C9C9;
+}
+
+.dp-highlighter{
+	width: 750px;
+	margin: 0 auto ! important;
+}
+
+.dp-highlighter span{
+	font-size: 11px;
+}

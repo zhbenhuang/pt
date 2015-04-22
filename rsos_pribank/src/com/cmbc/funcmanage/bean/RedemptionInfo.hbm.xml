@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cmbc.funcmanage.bean.RedemptionInfo" table="redemptionInfo" lazy="false">
+		<id name="businessId" type="java.lang.String">
+			<column name="businessId" not-null="true"></column>
+			<generator class="assigned"></generator>
+		</id>	
+		<property name="contractId" type="java.lang.String">
+			<column name="contractId"></column>
+		</property>
+		<property name="codeId" type="java.lang.String">
+			<column name="codeId"></column>
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="remark"></column>
+		</property>
+	</class>
+</hibernate-mapping>

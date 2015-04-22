@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="furtherDevelopmentProcess" xmlns="http://jbpm.org/4.4/jpdl" key="FDP" description="深度开发审批流程">
+   <swimlane name="channelService"/>
+   <swimlane name="afterService"/>
+   <swimlane name="afterManager"/>
+   <swimlane name="branchManager"/>
+   <start name="开始" g="267,1,48,48">
+      <transition name="提交" to="市场人员新建" g="9,-10"/>
+   </start>
+   <task name="市场人员新建" g="228,70,123,54" assignee="#{createUserId}">
+      <transition name="提交" to="支行行长审批" g="7,-9"/>
+   </task>
+   <task name="支行行长审批" g="229,148,122,52" swimlane="branchManager">
+      <transition name="审核通过" to="小微与销售服务部(调户岗)初审" g="8,-9"/>
+      <transition name="驳回" to="市场人员补资料" g="148,175:31,-21"/>
+   </task>
+   <task name="小微与销售服务部(调户岗)初审" g="197,221,183,52" swimlane="channelService">
+      <transition name="驳回" to="市场人员补资料" g="148,249:15,-24"/>
+      <transition name="审核通过" to="售后服务部审核(综合岗)审核" g="11,-8"/>
+      <transition name="办结" to="办结" g="-15,-20"/>
+   </task>
+   <task name="市场人员补资料" g="94,69,103,52" assignee="#{createUserId}">
+      <transition name="重新提交" to="支行行长审批" g="-27,-12"/>
+      <transition name="取消" to="取消" g="-10,-21"/>
+   </task>
+   <end-cancel name="取消" g="7,68,48,48"/>
+   <task name="售后服务部审核(综合岗)审核" g="198,297,180,52" swimlane="afterService">
+      <transition name="驳回" to="市场人员补资料" g="150,321:12,-24"/>
+      <transition name="审核通过" to="售后服务部(总经理)审核" g="8,-8"/>
+   </task>
+   <end name="办结" g="457,227,48,48"/>
+   <task name="售后服务部(总经理)审核" g="216,373,146,52" swimlane="afterManager">
+      <transition name="驳回" to="售后服务部审核(综合岗)审核" g="471,402;474,324:-31,-7"/>
+      <transition name="审核通过" to="完成" g="7,-7"/>
+   </task>
+   <end name="完成" g="268,464,48,48"/>
+</process>

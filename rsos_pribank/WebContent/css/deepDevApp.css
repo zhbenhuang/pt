@@ -1,0 +1,44 @@
+/* CSS Document */
+div.title{
+	position:absolute;
+	top:11px;
+	font-size:24px;
+	font-family:"微软雅黑";
+	left: 418px;
+	width: 276px;
+}
+
+div.position{
+	position:absolute;
+	top:67px;
+	left: 179px;
+	width: 757px;
+}
+
+td.weight{
+	font-weight:bold;
+}
+
+table{border-collapse:collapse;border-spacing:0;border-left:1px solid #888;border-top:1px solid #888;background:#efefef;}
+th,td{border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;}
+th{font-weight:bold;background:#ccc;}
+
+div.button{
+	position:absolute;
+	top:990px;
+	left: 465px;
+	width: 188px;
+}
+
+input.sty{
+	background:#CCC;
+	width:90px;
+	height:40px;
+}
+
+input.height{
+	width:557px;
+	height:auto;
+}
+
+	

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.cmbc.funcmanage.bean.ProductInfo" table="productInfo" schema="dbo" catalog="rsosdb_pbank" dynamic-insert="true" dynamic-update="true" lazy="false">
+	<id name="productCode" type="java.lang.String">
+		<column name="productCode" length="100" not-null="true"></column>
+		<generator class="assigned"></generator>
+	</id>
+	<property name="productName" type="java.lang.String">
+		<column name="productName" length="500" not-null="true"></column>
+	</property>
+	<property name="benefitDate" type="java.lang.String">
+		<column name="benefitDate" length="50" not-null="true"></column>
+	</property>
+	<property name="dueDate" type="java.lang.String">
+		<column name="dueDate" length="50" not-null="true"></column>
+	</property>
+	<property name="plannedBenefit" type="java.lang.String">
+		<column name="plannedBenefit" length="10" not-null="true"></column>
+	</property>
+	<property name="isRoll" type="java.lang.String">
+		<column name="isRoll" length="10" not-null="true"></column>
+	</property>
+	<property name="firstOpenDay" type="java.lang.String">
+		<column name="firstOpenDay" length="50"></column>
+	</property>
+	<property name="rollIntervalSpan" type="java.lang.String">
+		<column name="rollIntervalSpan" length="10"></column>
+	</property>
+	<property name="rollBenefit" type="java.lang.String">
+		<column name="rollBenefit" length="10"></column>
+	</property>
+	<property name="created" type="java.lang.String">
+		<column name="created" length="10" not-null="true"></column>
+	</property>
+	
+	
+</class>
+</hibernate-mapping>

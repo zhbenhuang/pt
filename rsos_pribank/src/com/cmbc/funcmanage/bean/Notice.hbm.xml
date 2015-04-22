@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cmbc.funcmanage.bean.Notice" table="notice" lazy="false">
+		<id name="noticeId" type="java.lang.String">
+			<column name="noticeId" not-null="true"></column>
+			<generator class="assigned"></generator>
+		</id>	
+		<property name="noticeType" type="java.lang.String">
+			<column name="noticeType" not-null="true"></column>
+		</property>
+		<property name="noticeTitle" type="java.lang.String">
+			<column name="noticeTitle"></column>
+		</property>
+		<property name="noticeArriveTime" type="java.lang.String">
+			<column name="noticeArriveTime"></column>
+		</property>
+		<property name="noticeDealTime" type="java.lang.String">
+			<column name="noticeDealTime"></column>
+		</property>
+		<property name="noticeViewTime" type="java.lang.String">
+			<column name="noticeViewTime"></column>
+		</property>
+		<property name="noticeViewStatus" type="java.lang.String">
+			<column name="noticeViewStatus"></column>
+		</property>
+		<property name="noticeDealStatus" type="java.lang.String">
+			<column name="noticeDealStatus"></column>
+		</property>
+		<property name="assBusinessId" type="java.lang.String">
+			<column name="assBusinessId"></column>
+		</property>
+		<property name="departmentId" type="java.lang.String">
+			<column name="departmentId"></column>
+		</property>
+		<property name="noticeFlag" type="java.lang.String">
+			<column name="noticeFlag"></column>
+		</property>
+	</class>
+</hibernate-mapping>

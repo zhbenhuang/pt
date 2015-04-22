@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<package name="product" namespace="" extends="json-default">
+		<action name="*_Product" class="com.cmbc.funcmanage.action.ProductAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="includeProperties">
+					product.productCode,ajaxResult,product.*
+		        </param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="error">/funcMng/productInfo.jsp</result>
+			<result name="list" type="json">/funcMng/productInfo.jsp</result>
+			<result name="listproduct">/funcMng/productInfo.jsp</result>
+		</action>
+
+		<action name="productAction" class="com.cmbc.funcmanage.action.ProductAction">
+			<result name="success" type="json">/funcMng/productInfo.jsp</result>
+		</action>
+		<action name="contractAction" class="com.cmbc.funcmanage.action.ContractAction">
+			<result name="success" type="json">/funcMng/contractInfo.jsp</result>
+			<result name="successTwo">/funcMng/contractInfo.jsp</result>
+ 			<result name="error">/funcMng/contractInfo.jsp</result>
+			<result name="waitNotices">/notice/waitNotices.jsp</result>
+		</action>
+		<action name="timerTaskAction" class="com.cmbc.funcmanage.action.TimerTaskAction">
+			<result name="success" type="json">/funcMng/contractInfo.jsp</result>
+		</action>
+		<action name="downloadInstance" class="com.cmbc.funcmanage.action.ContractAction">
+			<result name="success" type="stream">
+		        <param name="contentType">application/octet-stream;charset=GB18030</param>
+				<param name="contentDisposition">attachment;filename="${fileNewName}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">4096</param>		
+			</result>
+		</action>
+	</package>
+
+	<package name="clientFreeze" namespace="" extends="json-default">
+		<action name="inputClient" class="com.cmbc.funcmanage.action.ClientFreezeAction">
+			<result name="success" type="json">/funcMng/clientFreeze.jsp</result>
+		</action>
+		<action name="downloadTemplate" class="com.cmbc.funcmanage.action.ClientFreezeAction">
+			<result name="success" type="stream">
+		        <param name="contentType">application/octet-stream;charset=GB18030</param>
+				<param name="contentDisposition">attachment;filename="${fileNewName}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">4096</param>		
+			</result>
+		</action>
+		<action name="getClientFreezesList" class="com.cmbc.funcmanage.action.ClientFreezeAction">
+			<result name="success" type="json">/funcMng/clientFreeze.jsp</result>
+		</action>
+		<action name="saveClientFreeze" class="com.cmbc.funcmanage.action.ClientFreezeAction">
+			<result name="success" type="json">/funcMng/clientFreeze.jsp</result>
+		</action>
+		<action name="modifyClientFreeze" class="com.cmbc.funcmanage.action.ClientFreezeAction">
+			<result name="success" type="json">/funcMng/clientFreeze.jsp</result>
+		</action>
+		<action name="findClient" class="com.cmbc.funcmanage.action.ClientFreezeAction">
+			<result name="success" type="json">/funcMng/clientFreeze.jsp</result>
+		</action>
+		<action name="unFreezeClient" class="com.cmbc.funcmanage.action.ClientFreezeAction">
+			<result name="success" type="json">/funcMng/clientFreeze.jsp</result>
+		</action>
+	</package>
+	
+	<package name="tag" namespace="" extends="struts-default,json-default">
+		<action name="getTagList" class="com.cmbc.funcmanage.action.TagAction">
+			<result name="success" type="json">/funcMng/tag.jsp</result>
+		</action>
+		<action name="printTag" class="com.cmbc.funcmanage.action.TagAction">
+			<result name="success" type="json">/funcMng/tag.jsp</result>
+		</action>
+		<action name="saveTag" class="com.cmbc.funcmanage.action.TagAction">
+			<result name="success" type="json">/funcMng/tag.jsp</result>			
+		</action>
+		<action name="showTask" class="com.cmbc.funcmanage.action.TagAction">
+			<result name="fail">/funcMng/tag.jsp</result>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="createBarCode" class="rsos.framework.utils.OneBarcodeUtil" method="createBarcode">
+			<result name="success" type="json">/funcMng/tag.jsp</result>			
+		</action>
+		<action name="downloadTag" class="com.cmbc.funcmanage.action.TagAction">
+			<result name="success" type="stream">
+		        <param name="contentType">application/octet-stream;charset=GB18030</param>
+				<param name="contentDisposition">attachment;filename="${fileNewName}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">8192</param>		
+			</result>
+		</action>
+	</package>
+</struts>

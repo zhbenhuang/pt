@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+<constant name="struts.custom.il8n.resources" value="message"></constant>
+<constant name="struts.i18n.encoding" value="utf-8"></constant>
+<constant name="struts.multipart.saveDir" value="c:/tmp/"></constant>  
+<constant name="struts.multipart.maxSize" value="1209715200"></constant>
+
+<package name="attach" extends="json-default" namespace="">
+	<global-exception-mappings>
+		<exception-mapping exception="org.springframework.dao.DataAccessException"
+			result="dataAccessFailure" />
+	</global-exception-mappings>
+	<action name="attachAction" class="com.cmbc.attach.action.AttachAction">
+		<result name="addNoticeAttach">/flow/attach/addNoticeAttach.jsp</result>
+		<result name="downloadNoticeAttach">/flow/attach/downloadNoticeAttach.jsp</result>
+		<result name="deleteAttachSuccess">/flow/attach/deleteAttachSuccess.jsp</result>
+		<result name="listCheckNoticeAttach">/flow/attach/listCheckNoticeAttach.jsp</result>
+		<result name="listNoticeAttach">/flow/attach/listNoticeAttach.jsp</result>
+	</action>
+</package>
+
+<package name="struts2" extends="struts-default">
+	<action name="uploadAttach" class="com.cmbc.attach.action.UploadAttachAction">		
+		<interceptor-ref name="fileUpload">
+			<param name="maximumSize">20971520</param>
+			<param name="allowedTypes"> <!-- pdf, word, excel, ppt ,txt, zip, img-->
+				application/pdf, application/acrobat, application/x-pdf, applications/vnd.pdf, text/pdf, text/x-pdf, 
+				application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain,
+				application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+				application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+				application/vnd.openxmlformats-officedocument.presentationml.presentation,
+				application/zip, application/x-compressed, application/octet-stream, application/x-zip, application/x-zip-compressed, application/x-rar-compressed,
+				image/bmp, image/gif, image/jpeg, image/pjpeg, image/x-icon, image/png
+			</param>
+		</interceptor-ref>	
+		<interceptor-ref name="defaultStack"></interceptor-ref>	
+		<result name="success">/flow/attach/uploadSuccessNoticeAttach.jsp</result>
+		<result name="input">/flow/attach/addNoticeAttach.jsp</result>	
+	</action>
+
+	<action name="downloadAttach" class="com.cmbc.attach.action.DownloadAttachAction" >
+		<result name="success" type="stream">
+	        <param name="contentType">application/octet-stream;charset=GB18030</param>
+			<param name="contentDisposition">attachment;filename="${fileNewName}"</param>
+			<param name="inputName">downloadFile</param>
+			<param name="bufferSize">4096</param>		
+		</result>
+	</action>
+
+</package>
+</struts>

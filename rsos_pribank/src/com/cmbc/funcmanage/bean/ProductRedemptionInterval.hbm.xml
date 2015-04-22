@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.cmbc.funcmanage.bean.ProductRedemptionInterval" table="productRedemptionInterval" lazy="false">
+	<id name="redemptionIntervalId" type="java.lang.String">
+		<column name="redemptionIntervalId" not-null="true"></column>
+		<generator class="assigned"></generator>
+	</id>
+	<property name="productId" type="java.lang.String">
+		<column name="productId"></column>
+	</property>
+	<property name="openDay" type="java.lang.String">
+		<column name="openDay"></column>
+	</property>
+	<property name="redeemBegin" type="java.lang.String">
+		<column name="redeemBegin"></column>
+	</property>
+		<property name="redeemEnd" type="java.lang.String">
+		<column name="redeemEnd"></column>
+	</property>
+	<property name="rollBenefit" type="java.lang.String">
+		<column name="rollBenefit"></column>
+	</property>
+	<property name="redemptionStatus" type="java.lang.String">
+		<column name="redemptionStatus"></column>
+	</property>
+</class>
+</hibernate-mapping>

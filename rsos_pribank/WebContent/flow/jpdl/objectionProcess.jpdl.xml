@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process description="异议审批流程" key="OP" name="objectionProcess" xmlns="http://jbpm.org/4.4/jpdl">
+   <swimlane name="afterService"/>
+   <swimlane name="afterManager"/>
+   <start g="351,10,48,48" name="开始">
+      <transition g="7,-8" name="提交" to="市场人员新建"/>
+   </start>
+   <task assignee="#{createUserId}" g="321,90,102,52" name="市场人员新建">
+      <transition g="6,-10" name="提交" to="售后服务部审核(综合岗)审核"/>
+   </task>
+   <task g="288,189,169,52" name="售后服务部审核(综合岗)审核" swimlane="afterService">
+      <transition g="9,-9" name="审核通过" to="售后服务部(总经理)审核"/>
+      <transition g="178,210:27,-19" name="驳回" to="市场人员补资料"/>
+   </task>
+   <task g="288,302,168,52" name="售后服务部(总经理)审核" swimlane="afterManager">
+      <transition g="10,-9" name="审核通过" to="end1"/>
+      <transition g="526,327;526,215:-36,-16" name="驳回" to="售后服务部审核(综合岗)审核"/>
+   </task>
+   <task assignee="#{createUserId}" g="127,122,103,52" name="市场人员补资料">
+      <transition g="-11,-21" name="重新提交" to="售后服务部审核(综合岗)审核"/>
+      <transition g="-12,-25" name="取消" to="取消"/>
+   </task>
+   <end-cancel g="27,123,48,48" name="取消"/>
+   <end g="350,413,48,48" name="end1"/>
+   
+</process>

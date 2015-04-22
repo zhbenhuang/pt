@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process description="理财产品合同流程" key="CP" name="contractProcess" xmlns="http://jbpm.org/4.4/jpdl">
+   <swimlane name="contractManagement"/>
+   <start g="272,5,48,48" name="启动">
+      <transition g="7,-11" name="提交" to="支行理财经理新建"/>
+   </start>
+   <task assignee="#{createUserId}" g="238,80,114,52" name="支行理财经理新建">
+      <transition g="7,-11" name="提交" to="分行合同管理岗审批"/>
+   </task>
+   <task g="230,173,130,52" name="分行合同管理岗审批" swimlane="contractManagement">
+      <transition g="139,197:26,-23" name="驳回" to="支行理财经理补资料"/>
+      <transition g="7,-8" name="审核通过" to="合同提交信托"/>
+   </task>
+   <task assignee="#{createUserId}" g="78,76,124,52" name="支行理财经理补资料">
+      <transition g="-10,-25" name="取消" to="取消"/>
+   </task>
+   <end-cancel g="2,78,48,48" name="取消"/>
+   <task g="239,252,110,52" name="合同提交信托" swimlane="contractManagement">
+      <transition g="7,-7" name="提交信托" to="信托返回"/>
+   </task>
+   <task g="237,334,113,52" name="信托返回" swimlane="contractManagement">
+      <transition g="6,-9" name="信托返回" to="领取合同"/>
+   </task>
+   <end g="268,495,48,48" name="结束"/>
+   <task name="领取合同" g="242,413,99,50" swimlane="contractManagement">
+      <transition name="领取合同" to="结束" g="5,-11"/>
+   </task>
+</process>

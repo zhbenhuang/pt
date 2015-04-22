@@ -1,0 +1,24 @@
+/* CSS Document */
+body{
+	background:#F7F7F7;
+}
+div.accord{
+	position:absolute;
+	top:0px;
+	left:2px;
+	width:248px;
+}
+a{
+	text-decoration:none;
+}
+
+.ui-accordion .ui-accordion-header {
+	background:#F7F7F7;
+	display: block;
+	cursor: pointer;
+	height:20px;
+	position: relative;
+	margin-top: 2px;
+	padding: .5em .5em .5em .7em;
+	min-height: 0; /* support: IE7 */
+}

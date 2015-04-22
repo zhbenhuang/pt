@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.cmbc.sa.bean.Department" table="department" schema="dbo" catalog="rsosdb_pbank">
+		<id name="departmentId" type="java.lang.String">
+            <column name="departmentId" not-null="true" />
+            <generator class="assigned" />
+        </id>
+        <property name="departmentName" type="java.lang.String">
+            <column name="departmentName" />
+        </property>
+        <property name="anoDepartmentId" type="java.lang.String">
+            <column name="anoDepartmentId" />
+        </property>
+        <property name="anoDepartmentName" type="java.lang.String">
+            <column name="anoDepartmentName" />
+        </property>
+        <property name="type" type="java.lang.String">
+            <column name="type" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="remark" />
+        </property>
+        <property name="parentId" type="java.lang.String">
+            <column name="parentId" />
+        </property>
+        <property name="parentDepartmentName" type="java.lang.String">
+            <column name="parentDepartmentName" />
+        </property>
+    </class>
+</hibernate-mapping>

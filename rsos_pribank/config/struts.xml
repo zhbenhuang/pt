@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.custom.i18n.resources" value="message"/>
+	<constant name="struts.xwork.chaining.copyErrors" value="true"/>
+	<constant name="struts.xwork.chaining.copyFieldErrors" value="true"/>
+	<constant name="struts.xwork.chaining.copyMessages" value="true"/>
+	<constant name="struts.ui.theme" value="simple"/>
+	
+	<include file="struts-sa.xml"></include>
+	<include file="struts-flow.xml"></include>
+	<include file="struts-funcManage.xml"></include>
+	<include file="struts-report.xml"></include>
+	<include file="struts-attach.xml"></include>
+	<include file="struts-pribank.xml"></include>	
+	
+	<package name="default" extends="struts-default" namespace="/">
+		<global-results>
+			<result name="error">/error.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>        
+	</package>
+           
+</struts>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+ 	
+ 	<package name="flow_pck_json" namespace="" extends="json-default">
+ 		<action name="processBaseAction" class="com.cmbc.flow.action.ProcessBaseAction">
+ 			
+ 			<result name="waitDealTasks">/flow/pribank/waitDealTasks.jsp</result>
+ 			<result name="contract">/flow/pribank/contract.jsp</result>
+			<result name="redemption">/flow/pribank/redemption.jsp</result>
+			<result name="branchManager">/flow/pribank/branchManager.jsp</result>
+			
+			<result name="error">/flow/pribank/error.jsp</result>
+			<result name="success">/flow/pribank/success.jsp</result>
+ 		</action>
+ 		
+ 		<action name="flowManage" class="com.cmbc.flow.action.FlowAction">
+ 			<result name="success">/flow/flowmanage/deployFlow.jsp</result>
+ 			<result name="error">/flow/flowmanage/deployFlow.jsp</result>
+ 		</action>
+	</package>
+</struts>

@@ -1,0 +1,34 @@
+/* CSS Document */
+	#main{
+		width:520px;
+	}
+	.border{
+		margin-left:6px;
+		border:1px solid #CCC;
+		height:200px;
+		float:left;
+		width:300px;
+	}
+	.selected{
+		border:1px solid #CCC;
+		float:right;
+		height:200px;
+	}
+
+	.pos{
+		position:absolute;
+		top:220px;
+		left: 226px;
+	}
+	.btn{
+		position:absolute;
+		top:220px;
+		left: 366px;
+	}
+	.btn1{
+		position:absolute;
+		top:220px;
+		left: 366px;
+	}
+
+

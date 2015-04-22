@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.cmbc.sa.bean.Role" table="role" schema="dbo" catalog="rsosdb_pbank">
+        <composite-id>
+			<key-property name="roleId" type="java.lang.String">
+				<column name="roleId" not-null="true"></column>
+			</key-property>
+			<key-property name="business" type="java.lang.Integer">
+				<column name="business"></column>
+			</key-property>
+		</composite-id>
+        <property name="roleName" type="java.lang.String">
+            <column name="roleName" />
+        </property>
+        <property name="type" type="java.lang.String">
+            <column name="type" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cmbc.funcmanage.bean.Contract" table="contract" lazy="false">
+		<id name="contractId" type="java.lang.String">
+			<column name="contractId" not-null="true"></column>
+			<generator class="assigned"></generator>
+		</id>	
+		<property name="businessId" type="java.lang.String">
+			<column name="businessId"></column>
+		</property>
+		<property name="customeId" type="java.lang.String">
+			<column name="customeId" not-null="true"></column>
+		</property>
+		<property name="signAccount" type="java.lang.String">
+			<column name="signAccount"></column>
+		</property>
+		<property name="customeName" type="java.lang.String">
+			<column name="customeName"></column>
+		</property>
+		<property name="saleDate" type="java.lang.String">
+			<column name="saleDate"></column>
+		</property>
+		<property name="productType" type="java.lang.String">
+			<column name="productType"></column>
+		</property>
+		<property name="productCode" type="java.lang.String">
+			<column name="productCode"></column>
+		</property>
+		<property name="productName" type="java.lang.String">
+			<column name="productName"></column>
+		</property>
+		<property name="money" type="java.lang.String">
+			<column name="money"></column>
+		</property>
+		<property name="saleManager" type="java.lang.String">
+			<column name="saleManager"></column>
+		</property>
+		<property name="businessManager" type="java.lang.String">
+			<column name="businessManager"></column>
+		</property>
+		<property name="belongDepartment" type="java.lang.String">
+			<column name="belongDepartment"></column>
+		</property>
+		<property name="belongDepartmentId" type="java.lang.String">
+			<column name="belongDepartmentId"></column>
+		</property>
+		<property name="signDepartment" type="java.lang.String">
+			<column name="signDepartment"></column>
+		</property>
+		<property name="signDepartmentId" type="java.lang.String">
+			<column name="signDepartmentId"></column>
+		</property>
+		<property name="codeId" type="java.lang.String">
+			<column name="codeId"></column>
+		</property>
+		
+		<property name="addDate" type="java.lang.String">
+			<column name="addDate"></column>
+		</property>
+		<property name="modifyDate" type="java.lang.String">
+			<column name="modifyDate"></column>
+		</property>
+		<property name="operatorName" type="java.lang.String">
+			<column name="operatorName"></column>
+		</property>
+		<property name="contractInfoStatus" type="java.lang.String">
+			<column name="contractInfoStatus"></column>
+		</property>
+		
+		<property name="handStatus" type="java.lang.String">
+			<column name="handStatus"></column>
+		</property>
+		<property name="handDate" type="java.lang.String">
+			<column name="handDate"></column>
+		</property>
+		<property name="handXinTuoDate" type="java.lang.String">
+			<column name="handXinTuoDate"></column>
+		</property>
+		<property name="handBackDate" type="java.lang.String">
+			<column name="handBackDate"></column>
+		</property>
+		<property name="getContractDate" type="java.lang.String">
+			<column name="getContractDate"></column>
+		</property>
+		<property name="redempStatus" type="java.lang.String">
+			<column name="redempStatus"></column>
+		</property>
+		<property name="redempStartDate" type="java.lang.String">
+			<column name="redempStartDate"></column>
+		</property>
+		<property name="redempConformDate" type="java.lang.String">
+			<column name="redempConformDate"></column>
+		</property>
+		<property name="redempDate" type="java.lang.String">
+			<column name="redempDate"></column>
+		</property>
+		<property name="redemptionIntervalId" type="java.lang.String">
+			<column name="redemptionIntervalId"></column>
+		</property>
+		<property name="noticeStatus" type="java.lang.String">
+			<column name="noticeStatus"></column>
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="remark"></column>
+		</property>
+	</class>
+</hibernate-mapping>

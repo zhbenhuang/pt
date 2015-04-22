@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process description="理财产品赎回流程" key="RP" name="redemptionProcess" xmlns="http://jbpm.org/4.4/jpdl">
+   <swimlane name="productManager"/>
+   <start g="442,4,48,48" name="开始">
+      <transition g="9,-12" name="提交" to="支行理财经理新建"/>
+   </start>
+   <task assignee="#{createUserId}" g="407,84,115,52" name="支行理财经理新建">
+      <transition g="10,-6" name="提交" to="分行产品经理审核"/>
+   </task>
+   <task g="402,157,121,52" name="分行产品经理审核" swimlane="productManager">
+      <transition g="11,-10" name="审核通过" to="提交信托"/>
+      <transition g="300,183:22,-20" name="驳回" to="支行理财经理补资料"/>
+   </task>
+   <task g="401,232,122,52" name="提交信托" swimlane="productManager">
+      <transition name="提交信托" to="结束" g="9,-12"/>
+   </task>
+   <task assignee="#{createUserId}" g="234,85,131,52" name="支行理财经理补资料">
+      <transition g="-12,-21" name="取消" to="取消"/>
+   </task>
+   <end-cancel g="123,88,48,48" name="取消"/>
+   <end g="437,310,48,48" name="结束"/>
+</process>

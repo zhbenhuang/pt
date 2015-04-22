@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.cmbc.funcmanage.bean.Product" table="financialProduct" lazy="false">
+	<id name="productId" type="java.lang.String">
+		<column name="productId" not-null="true"></column>
+		<generator class="assigned"></generator>
+	</id>
+	<property name="productCode" type="java.lang.String">
+		<column name="productCode"></column>
+	</property>
+	<property name="redemptionIntervalId" type="java.lang.String">
+		<column name="redemptionIntervalId"></column>
+	</property>
+	<property name="productName" type="java.lang.String">
+		<column name="productName"></column>
+	</property>
+	<property name="benefitDate" type="java.lang.String">
+		<column name="benefitDate"></column>
+	</property>
+	<property name="dueDate" type="java.lang.String">
+		<column name="dueDate"></column>
+	</property>
+	<property name="plannedBenefit" type="java.lang.String">
+		<column name="plannedBenefit"></column>
+	</property>
+	<property name="isRoll" type="java.lang.String">
+		<column name="isRoll"></column>
+	</property>
+	<property name="openDay" type="java.lang.String">
+		<column name="openDay"></column>
+	</property>
+	<property name="redeemBegin" type="java.lang.String">
+		<column name="redeemBegin"></column>
+	</property>
+		<property name="redeemEnd" type="java.lang.String">
+		<column name="redeemEnd"></column>
+	</property>
+	<property name="rollBenefit" type="java.lang.String">
+		<column name="rollBenefit"></column>
+	</property>
+	<property name="addTime" type="java.lang.String">
+		<column name="addTime"></column>
+	</property>
+	<property name="editTime" type="java.lang.String">
+		<column name="editTime"></column>
+	</property>
+</class>
+</hibernate-mapping>
