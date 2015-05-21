@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsStruValue" table="PBMS_STRU_VALUE" schema="dbo" catalog="rsosdb_pbank">
+        <composite-id name="id" class="com.cmbc.pbms.bean.PbmsStruValueId">
+            <key-property name="struId" type="string">
+                <column name="STRU_ID" length="50" />
+            </key-property>
+            <key-property name="term" type="string">
+                <column name="TERM" length="50" />
+            </key-property>
+        </composite-id>
+        <property name="begValue" type="java.lang.Integer">
+            <column name="BEG_VALUE" />
+        </property>
+        <property name="surpValue" type="java.lang.Integer">
+            <column name="SURP_VALUE" />
+        </property>
+        <property name="alterTime" type="string">
+            <column name="ALTER_TIME" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

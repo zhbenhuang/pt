@@ -17,6 +17,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import rsos.framework.db.EasyBaseDaoImpl;
 import rsos.framework.easyui.EasyGridList;
 
+import com.cmbc.pbms.bean.PbmsStruInfo;
 import com.cmbc.sa.bean.Department;
 import com.cmbc.sa.dao.DepartmentDao;
 import com.cmbc.sa.dto.QueryDepartmentDto;
@@ -204,4 +205,17 @@ public class DepartmentDaoImpl extends EasyBaseDaoImpl<Department> implements De
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Department> getDepartments() {
+		 return getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException, SQLException {
+				
+				StringBuilder sql = new StringBuilder();
+				sql.append("select * from department b");
+				List<Department> list0 = (List<Department>)session.createSQLQuery(sql.toString()).addEntity("b", Department.class).list();
+				return list0;
+			}
+		});
+	}
 }

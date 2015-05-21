@@ -74,6 +74,12 @@
        		 	<value>com/cmbc/funcmanage/bean/Tag.hbm.xml</value>
        		 	<value>com/cmbc/funcmanage/bean/RedempBook.hbm.xml</value>    		 	
        		 	<value>com/cmbc/attach/bean/AttachInfo.hbm.xml</value>
+       		 	
+       		 	<value>com/cmbc/pbms/bean/PbmsServInfo.hbm.xml</value>
+       		 	<value>com/cmbc/pbms/bean/PbmsApproveParmt.hbm.xml</value>
+       		 	<value>com/cmbc/pbms/bean/PbmsApproveInfo.hbm.xml</value>
+       		 	<value>com/cmbc/pbms/bean/PbmsStruValue.hbm.xml</value>
+       		 	<value>com/cmbc/pbms/bean/PbmsServApply.hbm.xml</value>
        		</list>
 		</property>
 	</bean>
@@ -92,6 +98,7 @@
   	<aop:aspectj-autoproxy/>
 	<aop:config>
 		<aop:advisor pointcut="execution(* com.cmbc.sa.service..*.*(..))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="execution(* com.cmbc.pbms.service..*.*(..))" advice-ref="txAdvice"/>
 		<aop:advisor pointcut="execution(* com.cmbc.flow.service..*.*(..))" advice-ref="txAdvice"/>
 		<aop:advisor pointcut="execution(* com.cmbc.priBank.service..*.*(..))" advice-ref="txAdvice"/>
 		<aop:advisor pointcut="execution(* com.cmbc.funcmanage.service..*.*(..))" advice-ref="txAdvice"/>

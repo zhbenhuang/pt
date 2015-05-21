@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsRoleInfo" table="PBMS_ROLE_INFO" schema="dbo" catalog="rsosdb_pbank">
+        <id name="roleId" type="int">
+            <column name="ROLE_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="roleName" type="string">
+            <column name="ROLE_NAME" length="50" />
+        </property>
+        <property name="authority" type="string">
+            <column name="AUTHORITY" length="50" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="50" />
+        </property>
+        <property name="alterTime" type="string">
+            <column name="ALTER_TIME" length="23" />
+        </property>
+    </class>
+</hibernate-mapping>

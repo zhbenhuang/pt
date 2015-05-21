@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsServInfo" table="PBMS_SERV_INFO" schema="dbo" catalog="rsosdb_pbank">
+        <id name="serId" type="java.lang.Integer">
+            <column name="SER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="serName" type="string">
+            <column name="SER_NAME" length="50" />
+        </property>
+        <property name="serDes" type="string">
+            <column name="SER_DES" length="50" />
+        </property>
+        <property name="bigType" type="java.lang.Integer">
+            <column name="BIG_TYPE" />
+        </property>
+        <property name="smlType" type="java.lang.Integer">
+            <column name="SML_TYPE" />
+        </property>
+        <property name="serValue" type="java.lang.Integer">
+            <column name="SER_VALUE" />
+        </property>
+        <property name="serAmount" type="java.lang.Integer">
+            <column name="SER_AMOUNT" />
+        </property>
+        <property name="begTime" type="string">
+            <column name="BEG_TIME" length="23" />
+        </property>
+        <property name="endTime" type="string">
+            <column name="END_TIME" length="23" />
+        </property>
+        <property name="serPic" type="string">
+            <column name="SER_PIC" length="50" />
+        </property>
+        <property name="fileUrl1" type="string">
+            <column name="FILE_URL1" length="50" />
+        </property>
+        <property name="fileUrl2" type="string">
+            <column name="FILE_URL2" length="50" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="50" />
+        </property>
+        <property name="alterTime" type="string">
+            <column name="ALTER_TIME" length="23" />
+        </property>
+    </class>
+</hibernate-mapping>

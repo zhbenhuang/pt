@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsBoardingList" table="PBMS_BOARDING_LIST" schema="dbo" catalog="rsosdb_pbank">
+        <id name="seqNo" type="int">
+            <column name="SEQ_NO" />
+            <generator class="assigned" />
+        </id>
+        <property name="clientName" type="string">
+            <column name="CLIENT_NAME" length="50" />
+        </property>
+        <property name="servDate" type="timestamp">
+            <column name="SERV_DATE" length="23" />
+        </property>
+        <property name="fltNo" type="string">
+            <column name="FLT_NO" length="50" />
+        </property>
+        <property name="takeoffTime" type="timestamp">
+            <column name="TAKEOFF_TIME" length="23" />
+        </property>
+        <property name="arrivalTime" type="timestamp">
+            <column name="ARRIVAL_TIME" length="23" />
+        </property>
+        <property name="provenace" type="string">
+            <column name="PROVENACE" length="50" />
+        </property>
+        <property name="destination" type="string">
+            <column name="DESTINATION" length="50" />
+        </property>
+        <property name="pickTime" type="timestamp">
+            <column name="PICK_TIME" length="23" />
+        </property>
+        <property name="pickAddr" type="string">
+            <column name="PICK_ADDR" length="50" />
+        </property>
+        <property name="carType" type="java.lang.Integer">
+            <column name="CAR_TYPE" />
+        </property>
+        <property name="licenseNumber" type="string">
+            <column name="LICENSE_NUMBER" length="50" />
+        </property>
+        <property name="consignLuggage" type="java.lang.Integer">
+            <column name="CONSIGN_LUGGAGE" />
+        </property>
+        <property name="peopleNum" type="java.lang.Integer">
+            <column name="PEOPLE_NUM" />
+        </property>
+    </class>
+</hibernate-mapping>

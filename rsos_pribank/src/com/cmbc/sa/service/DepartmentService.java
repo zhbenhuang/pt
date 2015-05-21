@@ -17,4 +17,5 @@ public interface DepartmentService {
 	public void modifyDepartments(Department department) throws AppException;
 	public List<Department> findByPage(int currentPage, int pageSize,Map<String, Object> m)throws AppException;
 	public int getTotal(Map<String, Object> m)throws AppException;
+	public Map<String, String> getDepartmentMap();
 }

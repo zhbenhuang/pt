@@ -18,4 +18,5 @@ public interface DepartmentDao extends EasyBaseDao<Department> {
 			Map<String, Object> m);
 	public int getTotal(Map<String, Object> m);
 	public String findIdByName(String departmentName);
+	public List<Department> getDepartments();
 }

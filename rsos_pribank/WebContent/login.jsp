@@ -68,13 +68,13 @@ $(function() {
             </div>
             <div class="sys">
             	<label>子系统：</label><input name="business" id="business" style="width:136px" class="easyui-combobox" panelHeight="auto"
-					data-options="valueField:'id',textField:'text',data:selectBusiness" />
+					data-options="valueField:'id',textField:'text',data:selectBusiness" value="0"/>
             </div>
             <div class="username">
-            	<label>登录名：</label><input type="text" name="userId" class="input-style" />
+            	<label>登录名：</label><input type="text" name="userId" class="input-style" value="admin" />
             </div>
             <div class="password">
-            	<label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label><input id="passwd" name="password" type="password" style="ime-mode: disabled; display: inline;" class="input-style" /><input id="passwd2" type="text" style="ime-mode: disabled; display: none;" class="input-style"/> 
+            	<label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label><input id="passwd" name="password" type="password" style="ime-mode: disabled; display: inline;" class="input-style" value="123456"/><input id="passwd2" type="text" style="ime-mode: disabled; display: none;" class="input-style"/> 
 				<input id="chk"	type="checkbox" /><font size="2">显示密码</font>
           	</div>
           	<div class="login">

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsApproveParmt" table="PBMS_APPROVE_PARMT" schema="dbo" catalog="rsosdb_pbank">
+        <id name="apprType" type="int">
+            <column name="APPR_TYPE" />
+            <generator class="assigned" />
+        </id>
+        <property name="apprName" type="string">
+            <column name="APPR_NAME" length="50" />
+        </property>
+        <property name="apprSwitch" type="java.lang.Integer">
+            <column name="APPR_SWITCH" />
+        </property>
+        <property name="stepNum" type="java.lang.Integer">
+            <column name="STEP_NUM" />
+        </property>
+        <property name="stepRole1" type="string">
+            <column name="STEP_ROLE1" length="50" />
+        </property>
+        <property name="stepRole2" type="string">
+            <column name="STEP_ROLE2" length="50" />
+        </property>
+        <property name="stepRole3" type="string">
+            <column name="STEP_ROLE3" length="50" />
+        </property>
+        <property name="stepRole4" type="string">
+            <column name="STEP_ROLE4" length="50" />
+        </property>
+        <property name="stepRole5" type="string">
+            <column name="STEP_ROLE5" length="50" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" />
+        </property>
+        <property name="alterTime" type="string">
+            <column name="ALTER_TIME" length="23" />
+        </property>
+    </class>
+</hibernate-mapping>

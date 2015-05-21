@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsStruInfo" table="PBMS_STRU_INFO" schema="dbo" catalog="rsosdb_pbank">
+        <id name="struId" type="string">
+            <column name="STRU_ID" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="struName" type="string">
+            <column name="STRU_NAME" length="50" />
+        </property>
+        <property name="struAddr" type="string">
+            <column name="STRU_ADDR" length="50" />
+        </property>
+        <property name="struTel" type="string">
+            <column name="STRU_TEL" length="50" />
+        </property>
+        <property name="alterTime" type="string">
+            <column name="ALTER_TIME" length="23" />
+        </property>
+    </class>
+</hibernate-mapping>

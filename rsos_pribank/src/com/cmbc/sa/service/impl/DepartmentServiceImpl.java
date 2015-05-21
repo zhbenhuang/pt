@@ -1,5 +1,6 @@
 package com.cmbc.sa.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import rsos.framework.constant.GlobalConstants;
 import rsos.framework.easyui.EasyGridList;
 import rsos.framework.exception.AppException;
 
+import com.cmbc.pbms.bean.PbmsStruInfo;
 import com.cmbc.sa.bean.Department;
 import com.cmbc.sa.dao.DepartmentDao;
 import com.cmbc.sa.dto.QueryDepartmentDto;
@@ -92,5 +94,18 @@ public class DepartmentServiceImpl implements DepartmentService{
 			ex.printStackTrace();
 			throw new AppException("E000011",new String[]{m.toString()});
 		}
+	}
+	
+	@Override
+	public Map<String, String> getDepartmentMap() {
+		List<Department> list = departmentDao.getDepartments();
+		Map<String, String> map = new HashMap<String, String>();
+		if(list == null){
+			return map;
+		}
+		for (Department temp : list) {
+			map.put(temp.getDepartmentId(), temp.getDepartmentName());
+		}
+		return map;
 	}
 }

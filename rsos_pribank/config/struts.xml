@@ -9,6 +9,7 @@
 	<constant name="struts.ui.theme" value="simple"/>
 	
 	<include file="struts-sa.xml"></include>
+	<include file="struts-pbms.xml"></include>
 	<include file="struts-flow.xml"></include>
 	<include file="struts-funcManage.xml"></include>
 	<include file="struts-report.xml"></include>

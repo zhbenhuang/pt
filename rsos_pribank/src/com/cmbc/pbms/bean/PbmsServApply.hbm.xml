@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsServApply" table="PBMS_SERV_APPLY" schema="dbo" catalog="rsosdb_pbank">
+        <id name="seqNo" type="int">
+            <column name="SEQ_NO" />
+            <generator class="assigned" />
+        </id>
+        <property name="serId" type="java.lang.Integer">
+            <column name="SER_ID" />
+        </property>
+        <property name="apprId" type="java.lang.Integer">
+            <column name="APPR_ID" />
+        </property>
+        <property name="struId" type="string">
+            <column name="STRU_ID" length="50" />
+        </property>
+        <property name="userId" type="java.lang.Integer">
+            <column name="USER_ID" />
+        </property>
+        <property name="clientId" type="java.lang.Integer">
+            <column name="CLIENT_ID" />
+        </property>
+        <property name="pbclientName" type="string">
+            <column name="PBCLIENT_NAME" length="50" />
+        </property>
+        <property name="mobilePhone" type="java.lang.Integer">
+            <column name="MOBILE_PHONE" />
+        </property>
+        <property name="applyTime" type="string">
+            <column name="APPLY_TIME" length="23" />
+        </property>
+        <property name="applyQuatt" type="java.lang.Integer">
+            <column name="APPLY_QUATT" />
+        </property>
+        <property name="fileUrl1" type="string">
+            <column name="FILE_URL1" length="50" />
+        </property>
+        <property name="fileUrl2" type="string">
+            <column name="FILE_URL2" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="50" />
+        </property>
+        <property name="applyStatus" type="string">
+            <column name="APPLY_STATUS" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

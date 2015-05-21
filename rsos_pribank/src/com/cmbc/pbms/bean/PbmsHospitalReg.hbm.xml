@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsHospitalReg" table="PBMS_HOSPITAL_REG" schema="dbo" catalog="rsosdb_pbank">
+        <id name="seqNo" type="int">
+            <column name="SEQ_NO" />
+            <generator class="assigned" />
+        </id>
+        <property name="clientName" type="string">
+            <column name="CLIENT_NAME" length="50" />
+        </property>
+        <property name="idcarNo" type="java.lang.Integer">
+            <column name="IDCAR_NO" />
+        </property>
+        <property name="gender" type="java.lang.Integer">
+            <column name="GENDER" />
+        </property>
+        <property name="servDate" type="string">
+            <column name="SERV_DATE" length="23" />
+        </property>
+        <property name="hospital" type="java.lang.Integer">
+            <column name="HOSPITAL" />
+        </property>
+        <property name="medicalLabor" type="java.lang.Integer">
+            <column name="MEDICAL_LABOR" />
+        </property>
+        <property name="docter" type="string">
+            <column name="DOCTER" length="50" />
+        </property>
+        <property name="illnessDes" type="string">
+            <column name="ILLNESS_DES" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

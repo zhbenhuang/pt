@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsDicInfo" table="PBMS_DIC_INFO" schema="dbo" catalog="rsosdb_pbank">
+        <composite-id name="id" class="com.cmbc.pbms.bean.PbmsDicInfoId">
+            <key-property name="dicId" type="int">
+                <column name="DIC_ID" />
+            </key-property>
+            <key-property name="dicValue" type="int">
+                <column name="DIC_VALUE" />
+            </key-property>
+        </composite-id>
+        <property name="dicName" type="string">
+            <column name="DIC_NAME" length="50" />
+        </property>
+        <property name="dicCont" type="string">
+            <column name="DIC_CONT" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

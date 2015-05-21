@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 16:45:24 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cmbc.pbms.bean.PbmsApproveInfo" table="PBMS_APPROVE_INFO" schema="dbo" catalog="rsosdb_pbank">
+        <id name="apprId" type="int">
+            <column name="APPR_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="apprType" type="java.lang.Integer">
+            <column name="APPR_TYPE" />
+        </property>
+        <property name="apprStatus" type="java.lang.Integer">
+            <column name="APPR_STATUS" />
+        </property>
+        <property name="applyNo" type="java.lang.Integer">
+            <column name="APPLY_NO" />
+        </property>
+        <property name="applyUserId" type="string">
+            <column name="APPLY_USER_ID" />
+        </property>
+        <property name="curUserId" type="string">
+            <column name="CUR_USER_ID" />
+        </property>
+        <property name="applyTime" type="string">
+            <column name="APPLY_TIME" length="50" />
+        </property>
+        <property name="apprStep" type="java.lang.Integer">
+            <column name="APPR_STEP" />
+        </property>
+        <property name="userId1" type="string">
+            <column name="USER_ID1" />
+        </property>
+        <property name="apprTime1" type="string">
+            <column name="APPR_TIME1" length="50" />
+        </property>
+        <property name="procResult1" type="java.lang.Integer">
+            <column name="PROC_RESULT1" />
+        </property>
+        <property name="remark1" type="string">
+            <column name="REMARK1" length="50" />
+        </property>
+        <property name="userId2" type="string">
+            <column name="USER_ID2" />
+        </property>
+        <property name="apprTime2" type="string">
+            <column name="APPR_TIME2" length="50" />
+        </property>
+        <property name="procResult2" type="java.lang.Integer">
+            <column name="PROC_RESULT2" />
+        </property>
+        <property name="remark2" type="string">
+            <column name="REMARK2" length="50" />
+        </property>
+        <property name="userId3" type="string">
+            <column name="USER_ID3" />
+        </property>
+        <property name="apprTime3" type="string">
+            <column name="APPR_TIME3" length="50" />
+        </property>
+        <property name="procResult3" type="java.lang.Integer">
+            <column name="PROC_RESULT3" />
+        </property>
+        <property name="remark3" type="string">
+            <column name="REMARK3" length="50" />
+        </property>
+        <property name="userId4" type="string">
+            <column name="USER_ID4" />
+        </property>
+        <property name="apprTime4" type="string">
+            <column name="APPR_TIME4" length="50" />
+        </property>
+        <property name="procResult4" type="java.lang.Integer">
+            <column name="PROC_RESULT4" />
+        </property>
+        <property name="remark4" type="string">
+            <column name="REMARK4" length="50" />
+        </property>
+        <property name="userId5" type="string">
+            <column name="USER_ID5" />
+        </property>
+        <property name="apprTime5" type="string">
+            <column name="APPR_TIME5" length="50" />
+        </property>
+        <property name="procResult5" type="java.lang.Integer">
+            <column name="PROC_RESULT5" />
+        </property>
+        <property name="remark5" type="string">
+            <column name="REMARK5" length="50" />
+        </property>
+        <property name="apprCont" type="string">
+            <column name="APPR_CONT" length="1073741823" />
+        </property>
+        <property name="apprParam1" type="string">
+            <column name="APPR_PARAM1" length="50" />
+        </property>
+        <property name="apprParam2" type="string">
+            <column name="APPR_PARAM2" length="50" />
+        </property>
+        <property name="apprParam3" type="string">
+            <column name="APPR_PARAM3" length="50" />
+        </property>
+        <property name="apprParam4" type="string">
+            <column name="APPR_PARAM4" length="50" />
+        </property>
+        <property name="apprParam5" type="string">
+            <column name="APPR_PARAM5" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

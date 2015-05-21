@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	
+	<package name="servInfo" namespace="" extends="json-default">		
+		<action name="queryServInfoList" class="com.cmbc.pbms.action.ServInfoAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="saveServInfo" class="com.cmbc.pbms.action.ServInfoAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="modifyServInfo" class="com.cmbc.pbms.action.ServInfoAction">
+			<result name="success" type="json"></result>
+		</action>
+ 		<action name="deleteServInfo" class="com.cmbc.pbms.action.ServInfoAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+	</package>
+	
+	<package name="approveParmt" namespace="" extends="json-default">		
+		<action name="queryApproveParmtList" class="com.cmbc.pbms.action.ApproveParmtAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="saveApproveParmt" class="com.cmbc.pbms.action.ApproveParmtAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="modifyApproveParmt" class="com.cmbc.pbms.action.ApproveParmtAction">
+			<result name="success" type="json"></result>
+		</action>
+ 		<action name="deleteApproveParmt" class="com.cmbc.pbms.action.ApproveParmtAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+	</package>
+	
+	<package name="approveInfo" namespace="" extends="json-default">		
+		<action name="queryApproveInfoList" class="com.cmbc.pbms.action.ApproveInfoAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="saveApproveInfo" class="com.cmbc.pbms.action.ApproveInfoAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="modifyApproveInfo" class="com.cmbc.pbms.action.ApproveInfoAction">
+			<result name="success" type="json"></result>
+		</action>
+ 		<action name="deleteApproveInfo" class="com.cmbc.pbms.action.ApproveInfoAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+	</package>
+	
+	<package name="struValue" namespace="" extends="json-default">		
+		<action name="queryStruValueList" class="com.cmbc.pbms.action.StruValueAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="saveStruValue" class="com.cmbc.pbms.action.StruValueAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="modifyStruValue" class="com.cmbc.pbms.action.StruValueAction">
+			<result name="success" type="json"></result>
+		</action>
+ 		<action name="deleteStruValue" class="com.cmbc.pbms.action.StruValueAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+	</package>
+ 	
+ 	<package name="servApply" namespace="" extends="json-default">		
+		<action name="queryServApplyList" class="com.cmbc.pbms.action.ServApplyAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="newServApply" class="com.cmbc.pbms.action.ServApplyAction">
+ 			<result name="success" type="redirect">/serv/newServApply.jsp</result>
+ 		</action>
+ 		<action name="saveServApply" class="com.cmbc.pbms.action.ServApplyAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="modifyServApply" class="com.cmbc.pbms.action.ServApplyAction">
+			<result name="success" type="json"></result>
+		</action>
+ 		<action name="deleteServApply" class="com.cmbc.pbms.action.ServApplyAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+	</package>
+</struts>

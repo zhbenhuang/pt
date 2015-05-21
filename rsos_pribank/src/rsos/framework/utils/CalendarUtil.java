@@ -36,6 +36,7 @@ public class CalendarUtil {
 	public static final String UP_ITEM_DATEFORMAT_FULL = "yyyy-MM-dd HH:mm:ss";
 	public static final String UP_ITEM_DATEFORMAT_DATE = "yyyy-MM-dd";
 	public static final String UP_ITEM_DATEFORMAT_DATE_1 = "yyyy/M/d";
+	public static final String UP_ITEM_DATEFORMAT_DATE_2 = "yyyy/M/d HH:mm:ss";
 	public static final String DATEFORMAT_YYYYMMDD = "yyyyMMdd";
 	public static final String UP_ITEM_DATEFORMAT_TIME = "hh:mm:ss";
 	public static final String UP_ITEM_DATEFORMAT_HALF_TIME = "yyyy-MM-dd HH:mm";
