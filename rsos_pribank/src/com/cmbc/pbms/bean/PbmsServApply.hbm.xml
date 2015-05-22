@@ -17,16 +17,16 @@
         <property name="struId" type="string">
             <column name="STRU_ID" length="50" />
         </property>
-        <property name="userId" type="java.lang.Integer">
+        <property name="userId" type="string">
             <column name="USER_ID" />
         </property>
-        <property name="clientId" type="java.lang.Integer">
+        <property name="clientId" type="string">
             <column name="CLIENT_ID" />
         </property>
         <property name="pbclientName" type="string">
             <column name="PBCLIENT_NAME" length="50" />
         </property>
-        <property name="mobilePhone" type="java.lang.Integer">
+        <property name="mobilePhone" type="string">
             <column name="MOBILE_PHONE" />
         </property>
         <property name="applyTime" type="string">

@@ -9,8 +9,8 @@ var selectRank =
 
 var selectBusiness =
 	 [
-	  { id: '0', text: '超级管理'},
-	  { id: '2', text: '私银销售',"selected":true}
+	  { id: '0', text: '超级管理', "selected":true},
+	  { id: '2', text: '私银销售'}
 	 ];
 
 var selectMinBusiness =
@@ -76,6 +76,7 @@ var selectBigType =
 	 ];
 var selectSmlType =
 	 [
+	  { id: '0', text: '请选择' },
 	  { id: '1', text: '易登机',"selected":true },
 	  { id: '2', text: '礼宾车'},
 	  { id: '3', text: '合谐体检'},

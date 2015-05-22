@@ -57,48 +57,48 @@
 				showErrorMessage(xhr);
 			},
 			columns:[[
-				{field:'serPic' ,title:'图片' ,width:100 ,align:'center'},
-				{field:'serId' ,title:'活动ID' ,width:100 ,align:'center'},
-				{field:'serName' ,title:'活动名称' ,width:100 ,align:'center'},
+				{field:'serPic' ,title:'图片',width:50,align:'center',formatter:function(value,row,index){return '<img src="d:/temp/'+row.serPic+'" />';}},
+				{field:'serId' ,title:'活动ID' ,width:50 ,align:'center'},
+				{field:'serName' ,title:'活动名称' ,width:50 ,align:'center'},
 				{field:'serDes' ,title:'活动描述' ,width:100 ,align:'center'},
 				{
 					field:'bigType' ,
 					title:'活动大类' ,
-					width:100 ,
+					width:50 ,
 					align:'center',
 					formatter:function(value , record , index){
 						if(value == 1){
 							return '<span style=color:black; >尊享服务</span>' ;
 						}else if(value == 2){
-							return '<span style=color:green; >尊享活动</span>' ;
+							return '<span style=color:black; >尊享活动</span>' ;
 						}else if(value == 3){
-							return '<span style=color:blue; >尊享礼品</span>' ;
+							return '<span style=color:black; >尊享礼品</span>' ;
 						}
 					}
 				},
 				{
 					field:'smlType' ,
 					title:'活动小类' ,
-					width:100 ,
+					width:50 ,
 					align:'center',
 					formatter:function(value , record , index){
 						if(value == 0){
 							return '<span style=color:black; >请选择</span>' ;
 						}else if(value == 1){
-							return '<span style=color:green; >易登机</span>' ;
+							return '<span style=color:black; >易登机</span>' ;
 						}else if(value == 2){
-							return '<span style=color:blue; >礼宾车</span>' ;
+							return '<span style=color:black; >礼宾车</span>' ;
 						}else if(value == 3){
-							return '<span style=color:blue; >和谐体检</span>' ;
+							return '<span style=color:black; >和谐体检</span>' ;
 						}else if(value == 4){
-							return '<span style=color:blue; >和谐挂号</span>' ;
+							return '<span style=color:black; >和谐挂号</span>' ;
 						}
 					}
 				},
-				{field:'serValue' ,title:'价格' ,width:100 ,align:'center'},
-				{field:'serAmount' ,title:'剩余数量' ,width:100 ,align:'center'},
-				{field:'begTime' ,title:'生效时间' ,width:110 ,align:'center'},
-				{field:'endTime' ,title:'失效时间' ,width:110 ,align:'center'}
+				{field:'serValue' ,title:'价格' ,width:50 ,align:'center'},
+				{field:'serAmount' ,title:'剩余数量' ,width:30 ,align:'center'},
+				{field:'begTime' ,title:'生效时间' ,width:120 ,align:'center'},
+				{field:'endTime' ,title:'失效时间' ,width:120 ,align:'center'}
 
 			]] ,
 			pagination: true , 
@@ -287,22 +287,15 @@
 	
 	
   	
-  	<div id="newServInfoDialog" title="新增标的" class="easyui-dialog" style="width:300px;height:400px;background-color:#E4F5EF;"  
+  	<div id="newServInfoDialog" title="新增标的" class="easyui-dialog" style="width:600px;height:500px;background-color:#E4F5EF;"  
         data-options="iconCls:'icon-save',modal:true,draggable:true,closed:true">
 		<form id="newServInfoForm" action="" method="post"  align="center">
+		<input id="serIdNew" name="serId" type="hidden" value=""  />
 		<br/>
 		<table align="center" width="90%" border="1" style="background-color:#E4F5EF;">
 			<tr>
-				<td align="right">标的ID:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input id="serIdNew" name="serId" type="text" class="easyui-validatebox" required=true missingMessage="标的ID为数字,不可为空!" style="height:22px;border:1px solid #A4BED4;" value=""  /></td>
-			</tr>
-			<tr>
 				<td align="right">标的名称:&nbsp;<font color="red">*</font></td>
 				<td align="left"><input name="serName" type="text" class="easyui-validatebox" required=true missingMessage="标的名称不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
-			</tr>
-			<tr>
-				<td align="right">标的描述:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="serDes" type="text" class="easyui-validatebox" required=true missingMessage="标的描述不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
 			</tr>
 			<tr>
 				<td align="right">标的大类&nbsp;<font color="red">*</font></td>
@@ -336,7 +329,31 @@
 				<td align="center">失效时间&nbsp;<font color="red">*</font></td>
 				<td><input type="text" id="endTime" name="endTime" class="easyui-datebox" required=true missingMessage="失效时间不能为空" style="height:22px;border:1px solid #A4BED4;" value=""/></td>
 			</tr>
-			
+			<tr>
+				<td align="right">标的描述:&nbsp;<font color="red">*</font></td>
+				<td align="left"><input name="serDes" type="text" class="easyui-validatebox" required=true missingMessage="标的描述不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+			</tr>
+			<tr>
+				<td align="right">标的图片:&nbsp;<font color="red">*</font></td>
+				<td align="left">
+				<input name="serPic" type="text" class="easyui-validatebox" required=true missingMessage="标的图片不可为空!" value="" />
+				<input name="uploadSerPic" type="file" class="easyui-validatebox" required=true missingMessage="标的图片不可为空!" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">标的附件一:&nbsp;<font color="red">*</font></td>
+				<td align="left">
+				<input name="fileUrl1" type="text" value="" />
+				<input name="uploadFileUrl1" type="file" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">标的附件二:&nbsp;<font color="red">*</font></td>
+				<td align="left">
+				<input name="fileUrl2" type="text" value="" />
+				<input name="uploadFileUrl2" type="file" value="" />
+				</td>
+			</tr>
 			<tr align="center">
 				<td colspan="2">
 					<a href="javascript:void(0)" id="confirmAdd" class="easyui-linkbutton">保存</a>

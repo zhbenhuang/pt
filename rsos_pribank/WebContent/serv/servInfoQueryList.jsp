@@ -41,6 +41,7 @@
 		});
 		
 		
+		
 		$('#t_servInfo').datagrid({
 			title:'列表' ,
 			fit:true ,
@@ -60,21 +61,19 @@
 				showErrorMessage(xhr);
 			},
 			columns:[[
-				{field:'serPic' ,title:'图片' ,width:100 ,align:'center'},
-				{field:'serId' ,title:'活动ID' ,width:100 ,align:'center'},
-				{field:'serName' ,title:'活动名称' ,width:100 ,align:'center'},
+				{field:'serPic' ,title:'图片' ,width:50 ,align:'center'},
+				{field:'serId' ,title:'活动ID' ,width:50 ,align:'center'},
+				{field:'serName' ,title:'活动名称' ,width:50 ,align:'center'},
 				{field:'serDes' ,title:'活动描述' ,width:100 ,align:'center'},
-				{field:'serValue' ,title:'价格' ,width:100 ,align:'center'},
-				{field:'serAmount' ,title:'剩余数量' ,width:100 ,align:'center'},
-				{field:'begTime' ,title:'生效时间' ,width:110 ,align:'center'},
-				{field:'endTime' ,title:'失效时间' ,width:110 ,align:'center'},
-				{field:'opt' ,title:'执行操作' ,width:100 ,align:'center'}
-
+				{field:'serValue' ,title:'价格' ,width:30 ,align:'center'},
+				{field:'serAmount' ,title:'剩余数量' ,width:30 ,align:'center'},
+				{field:'begTime' ,title:'生效时间' ,width:120 ,align:'center'},
+				{field:'endTime' ,title:'失效时间' ,width:120 ,align:'center'},
 			]] ,
 			pagination: true , 
 			pageSize: 20 ,
 			pageList:[10,20,50] ,
-			toolbar:[
+			toolbar:[	
 		         {
 		       		text:'申请兑换' ,
 		       		iconCls:'icon-my-add' , 
@@ -84,6 +83,7 @@
 		});
 
 	});
+	
 	
 	function newServApply(){
 		actionMethod = 'newServApply';
@@ -109,9 +109,9 @@
 			});
 		}
 	}
-	
 
-	$('#confirmAdd').click(function(){
+	function doConfirmAdd1(){
+		actionMethod = "saveServApply";
 		if($('#newServApplyForm').form('validate')){				
 			$.ajax({
 				type: 'post' ,
@@ -133,11 +133,12 @@
 		} else {
 			LG.showError("提示信息","数据验证不通过,不能保存!");
 		}
-	});
-
-	$('#cancelAdd').click(function(){
+	}
+	
+	function doCancelAdd1(){
 		$('#newServApplyDialog').dialog('close');
-	});
+	}
+	
 	
 	//js方法：序列化表单 			
 	function serializeForm(form){
@@ -218,12 +219,13 @@
 			
 			<tr align="center">
 				<td colspan="2">
-					<a href="javascript:void(0)" id="confirmAdd" class="easyui-linkbutton">申请</a>
-					<a href="javascript:void(0)" id="cancelAdd" class="easyui-linkbutton">关闭</a>
+					<a href="javascript:void(0)" id="confirmAdd1" onclick="doConfirmAdd1();" class="easyui-linkbutton">申请</a>
+					<a href="javascript:void(0)" id="cancelAdd1" onclick="doCancelAdd1();" class="easyui-linkbutton">关闭</a>
 				</td>
 			</tr>
 		</table>
 		</form> 			
 	</div>
+	
   </body>
 </html>

@@ -68,7 +68,7 @@
 						if(value == 1){
 							return '<span style=color:black; >开</span>' ;
 						}else if(value == 2){
-							return '<span style=color:green; >关</span>' ;
+							return '<span style=color:black; >关</span>' ;
 						}
 					}
 				},

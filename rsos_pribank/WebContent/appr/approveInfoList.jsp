@@ -64,13 +64,13 @@
 						if(value == 1){
 							return '<span style=color:black; >用户变更审批</span>' ;
 						}else if(value == 2){
-							return '<span style=color:green; >客户变更审批</span>' ;
+							return '<span style=color:black; >客户变更审批</span>' ;
 						}else if(value == 3){
-							return '<span style=color:green; >机构变更审批</span>' ;
+							return '<span style=color:black; >机构变更审批</span>' ;
 						}else if(value == 4){
-							return '<span style=color:green; >活动创建审批</span>' ;
+							return '<span style=color:black; >活动创建审批</span>' ;
 						}else if(value == 5){
-							return '<span style=color:green; >活动报名审批</span>' ;
+							return '<span style=color:black; >活动报名审批</span>' ;
 						}
 					}
 				},
@@ -83,11 +83,11 @@
 						if(value == 1){
 							return '<span style=color:black; >审批中</span>' ;
 						}else if(value == 2){
-							return '<span style=color:green; >审批通过</span>' ;
+							return '<span style=color:black; >审批通过</span>' ;
 						}else if(value == 3){
-							return '<span style=color:green; >审批不通过</span>' ;
+							return '<span style=color:black; >审批不通过</span>' ;
 						}else if(value == 4){
-							return '<span style=color:green; >终止</span>' ;
+							return '<span style=color:black; >终止</span>' ;
 						}
 					}
 				},
@@ -95,7 +95,7 @@
 				{field:'applyUserId' ,title:'申请人' ,width:30 ,align:'center'},
 				{field:'curUserId' ,title:'当前处理人' ,width:30 ,align:'center'},
 				{field:'applyTime' ,title:'申请时间' ,width:50 ,align:'center'},
-				{field:'opt' ,title:'操作' ,width:30 ,align:'center'}
+				{field:'opt' ,title:'操作' ,width:50 ,align:'center'}
 
 			]] ,
 			pagination: true , 

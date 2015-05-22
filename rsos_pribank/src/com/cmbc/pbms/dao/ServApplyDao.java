@@ -8,7 +8,7 @@ import com.cmbc.pbms.dto.QueryServApplyDto;
 
 public interface ServApplyDao extends EasyBaseDao<PbmsServApply> {
 	public EasyGridList<PbmsServApply> selectServApplys(QueryServApplyDto queryDto);
-	public PbmsServApply selectServApply(String serNo);
+	public PbmsServApply selectServApply(String seqNo);
 	public void deleteServApply(String idstr);
 	public int getMaxId();
 }

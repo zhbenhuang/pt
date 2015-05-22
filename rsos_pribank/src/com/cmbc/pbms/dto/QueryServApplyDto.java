@@ -7,7 +7,7 @@ import rsos.framework.db.PageDto;
 public class QueryServApplyDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private PageDto pageDto;
-	private String serNo;
+	private String seqNo;
 	private String serId;
 	private String apprId;
 	public PageDto getPageDto() {
@@ -22,11 +22,11 @@ public class QueryServApplyDto implements Serializable {
 	public void setSerId(String serId) {
 		this.serId = serId;
 	}
-	public String getSerNo() {
-		return serNo;
+	public String getSeqNo() {
+		return seqNo;
 	}
-	public void setSerNo(String serNo) {
-		this.serNo = serNo;
+	public void setSeqNo(String seqNo) {
+		this.seqNo = seqNo;
 	}
 	public String getApprId() {
 		return apprId;

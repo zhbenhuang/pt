@@ -30,14 +30,14 @@ public class ServApplyDaoImpl extends EasyBaseDaoImpl<PbmsServApply> implements 
 		getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
 				if (queryDto.getPageDto().getOrderColumn() == null)
-					queryDto.getPageDto().setOrderColumn("SER_NO");
+					queryDto.getPageDto().setOrderColumn("SEQ_NO");
 				int startIndex = (queryDto.getPageDto().getPage() - 1) * queryDto.getPageDto().getPageSize();
 				Boolean hasWhere = Boolean.FALSE;
 				StringBuilder fromSql = new StringBuilder();
 				fromSql.append("from PBMS_SERV_APPLY b ");
 				
             	ArrayList<Object> params = new ArrayList<Object>();
-            	hasWhere = appendLikeOrEquals(fromSql, params, "b.SER_NO", queryDto.getSerNo(),hasWhere);
+            	hasWhere = appendLikeOrEquals(fromSql, params, "b.SEQ_NO", queryDto.getSeqNo(),hasWhere);
             	hasWhere = appendLikeOrEquals(fromSql, params, "b.SER_ID", queryDto.getSerId(),hasWhere);
             	hasWhere = appendLikeOrEquals(fromSql, params, "b.APPLY_ID", queryDto.getApprId(),hasWhere);
 				            	
@@ -67,7 +67,7 @@ public class ServApplyDaoImpl extends EasyBaseDaoImpl<PbmsServApply> implements 
 	
 
 	@SuppressWarnings({ "unchecked"})
-	public PbmsServApply selectServApply(final String serNo) {
+	public PbmsServApply selectServApply(final String seqNo) {
 		
 		PbmsServApply result = (PbmsServApply)getHibernateTemplate().execute(new HibernateCallback() {
 			
@@ -75,11 +75,11 @@ public class ServApplyDaoImpl extends EasyBaseDaoImpl<PbmsServApply> implements 
 				
 				StringBuilder sql = new StringBuilder();
 				sql.append("select {b.*} from PBMS_SERV_APPLY b ")
-					.append(" where b.SER_NO=:serNo ");
+					.append(" where b.SEQ_NO=:seqNo ");
 				
 				Query queryResult = session.createSQLQuery( sql.toString() )
 										.addEntity("b", PbmsServApply.class);
-				queryResult.setString("serNo",serNo );
+				queryResult.setString("seqNo",seqNo );
                 return (PbmsServApply) queryResult.uniqueResult();
 			}
 		});
@@ -89,7 +89,7 @@ public class ServApplyDaoImpl extends EasyBaseDaoImpl<PbmsServApply> implements 
 	@SuppressWarnings({ "unchecked"})
 	public void deleteServApply(final String idstr) {
 		final StringBuilder sqlBuilder = new StringBuilder();
-		sqlBuilder.append(" delete from PBMS_SERV_APPLY where SER_NO in ( ")
+		sqlBuilder.append(" delete from PBMS_SERV_APPLY where SEQ_NO in ( ")
 			.append(idstr).append(" ) ");
 		
 		this.getHibernateTemplate().execute(new HibernateCallback(){
@@ -110,7 +110,7 @@ public class ServApplyDaoImpl extends EasyBaseDaoImpl<PbmsServApply> implements 
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
 				StringBuilder sql = new StringBuilder();
-				sql.append("select top 1 SER_NO from PBMS_SERV_APPLY order by SER_NO desc");
+				sql.append("select top 1 SEQ_NO from PBMS_SERV_APPLY order by SEQ_NO desc");
 				return session.createSQLQuery(sql.toString()).uniqueResult();
 			}
 		});

@@ -15,10 +15,10 @@ public class PbmsServApply implements java.io.Serializable {
 	private Integer serId;
 	private Integer apprId;
 	private String struId;
-	private Integer userId;
-	private Integer clientId;
+	private String userId;
+	private String clientId;
 	private String pbclientName;
-	private Integer mobilePhone;
+	private String mobilePhone;
 	private String applyTime;
 	private Integer applyQuatt;
 	private String fileUrl1;
@@ -34,8 +34,8 @@ public class PbmsServApply implements java.io.Serializable {
 	}
 
 	public PbmsServApply(int seqNo, Integer serId, Integer apprId,
-			String struId, Integer userId, Integer clientId,
-			String pbclientName, Integer mobilePhone, String applyTime,
+			String struId, String userId, String clientId,
+			String pbclientName, String mobilePhone, String applyTime,
 			Integer applyQuatt, String fileUrl1, String fileUrl2,
 			String remark, String applyStatus) {
 		this.seqNo = seqNo;
@@ -86,19 +86,19 @@ public class PbmsServApply implements java.io.Serializable {
 		this.struId = struId;
 	}
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public Integer getClientId() {
+	public String getClientId() {
 		return this.clientId;
 	}
 
-	public void setClientId(Integer clientId) {
+	public void setClientId(String clientId) {
 		this.clientId = clientId;
 	}
 
@@ -110,11 +110,11 @@ public class PbmsServApply implements java.io.Serializable {
 		this.pbclientName = pbclientName;
 	}
 
-	public Integer getMobilePhone() {
+	public String getMobilePhone() {
 		return this.mobilePhone;
 	}
 
-	public void setMobilePhone(Integer mobilePhone) {
+	public void setMobilePhone(String mobilePhone) {
 		this.mobilePhone = mobilePhone;
 	}
 

@@ -34,6 +34,7 @@
 	</bean>	
 	<bean id="servApplyAction" class="com.cmbc.pbms.action.ServApplyAction">
 		<property name="servApplyService" ref="servApplyService"></property>
+		<property name="approveInfoService" ref="approveInfoService"></property>
 	</bean>	
 	
 	<!--service-->	

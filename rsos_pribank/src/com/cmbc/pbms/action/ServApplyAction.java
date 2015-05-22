@@ -15,8 +15,10 @@ import rsos.framework.exception.AppException;
 import rsos.framework.struts2.BaseAction;
 import rsos.framework.utils.CalendarUtil;
 
+import com.cmbc.pbms.bean.PbmsApproveInfo;
 import com.cmbc.pbms.bean.PbmsServApply;
 import com.cmbc.pbms.dto.QueryServApplyDto;
+import com.cmbc.pbms.service.ApproveInfoService;
 import com.cmbc.pbms.service.ServApplyService;
 import com.cmbc.sa.bean.Users;
 import com.opensymphony.xwork2.Action;
@@ -27,10 +29,14 @@ public class ServApplyAction extends BaseAction {
 	private static final long serialVersionUID = 1L;	
 	
 	private ServApplyService servApplyService;
+	private ApproveInfoService approveInfoService;
 	private EasyResult ret;
 	
 	public void setServApplyService(ServApplyService servApplyService) {
 		this.servApplyService = servApplyService;
+	}
+	public void setApproveInfoService(ApproveInfoService approveInfoService) {
+		this.approveInfoService = approveInfoService;
 	}
 	
 	public EasyResult getRet() {
@@ -45,13 +51,13 @@ public class ServApplyAction extends BaseAction {
 		try{
 			log.info("-------queryServApplyList--------");
 			printParameters();
-			String serNo = getHttpRequest().getParameter("serNo");
+			String seqNo = getHttpRequest().getParameter("seqNo");
 			String serId = getHttpRequest().getParameter("serId");
 			String apprId = getHttpRequest().getParameter("apprId");
 			
 			QueryServApplyDto queryDto = new QueryServApplyDto();
 			queryDto.setPageDto(initPageParameters());
-			queryDto.setSerNo(serNo);
+			queryDto.setSeqNo(seqNo);
 			queryDto.setSerId(serId);
 			queryDto.setApprId(apprId);
 			
@@ -75,9 +81,9 @@ public class ServApplyAction extends BaseAction {
 		try{
 			log.info("-------findServApply--------");
 			printParameters();
-			String serNo = getHttpRequest().getParameter("serNo");
+			String seqNo = getHttpRequest().getParameter("seqNo");
 			
-			PbmsServApply servApply = servApplyService.findServApply(serNo);
+			PbmsServApply servApply = servApplyService.findServApply(seqNo);
 			EasyObject<PbmsServApply> result = new EasyObject<PbmsServApply>(Constants.RETCODE_00000, getText(Constants.RETCODE_00000), servApply);
 			writeJsonSuccess(result.toJson());
 		}catch(AppException e){
@@ -111,9 +117,9 @@ public class ServApplyAction extends BaseAction {
 		try{
 			log.info("-------saveServApply--------");
 			printParameters();
-			int serNo = servApplyService.nextId();
+			int seqNo = servApplyService.nextId();
 			String serId = getHttpRequest().getParameter("serId");
-			String apprId = "";//create a appr id
+			int apprId = -1;//待被审批时填入此值
 			
 			Users user = (Users)getSession().getAttribute(GlobalConstants.USER_INFORMATION_KEY);
 			String struId = user.getDepartmentId();
@@ -128,21 +134,21 @@ public class ServApplyAction extends BaseAction {
 			String remark = getHttpRequest().getParameter("remark");
 			String applyStatus = "1";
 			
-			
-			PbmsServApply oldServApply = servApplyService.findServApply(serNo+"");
+			//create servApply
+			PbmsServApply oldServApply = servApplyService.findServApply(seqNo+"");
 			if(oldServApply!=null){
 				EasyResult result = new EasyResult(Constants.RETCODE_000022,getText(Constants.RETCODE_000022));
 				writeJsonSuccess(result.toJson());
 			}else{
 				PbmsServApply servApply = new PbmsServApply();
-				servApply.setSeqNo(serNo);
+				servApply.setSeqNo(seqNo);
 				servApply.setSerId(Integer.parseInt(serId));
-				servApply.setApprId(Integer.parseInt(apprId));
+				servApply.setApprId(apprId);
 				servApply.setStruId(struId);
-				servApply.setUserId(Integer.parseInt(userId));
-				servApply.setClientId(Integer.parseInt(clientId));
+				servApply.setUserId(userId);
+				servApply.setClientId(clientId);
 				servApply.setPbclientName(pbclientName);
-				servApply.setMobilePhone(Integer.parseInt(mobilePhone));
+				servApply.setMobilePhone(mobilePhone);
 				servApply.setApplyTime(applyTime);
 				servApply.setApplyQuatt(applyQuatt);
 				servApply.setFileUrl1(fileUrl1);
@@ -154,6 +160,7 @@ public class ServApplyAction extends BaseAction {
 						getText(Constants.RETCODE_00000));
 				writeJsonSuccess(result.toJson());
 			}
+			
 		}catch(AppException e){
 			writeErrors(e.getId());
 			e.printStackTrace();
@@ -167,7 +174,7 @@ public class ServApplyAction extends BaseAction {
 		try{
 			log.info("-------modifyServApply--------");
 			printParameters();
-			String serNo = getHttpRequest().getParameter("serNo");
+			String seqNo = getHttpRequest().getParameter("seqNo");
 			String serId = getHttpRequest().getParameter("serId");
 			String apprId = getHttpRequest().getParameter("apprId");
 			Users user = (Users)getSession().getAttribute(GlobalConstants.USER_INFORMATION_KEY);
@@ -181,16 +188,16 @@ public class ServApplyAction extends BaseAction {
 			String fileUrl2 = getHttpRequest().getParameter("fileUrl2");
 			String remark = getHttpRequest().getParameter("remark");
 			
-			PbmsServApply servApply = servApplyService.findServApply(serNo);
-			servApply.setSeqNo(Integer.parseInt(serNo));
+			PbmsServApply servApply = servApplyService.findServApply(seqNo);
+			servApply.setSeqNo(Integer.parseInt(seqNo));
 			servApply.setSerId(Integer.parseInt(serId));
 			servApply.setApprId(Integer.parseInt(apprId));
 			servApply.setStruId(struId);
-			servApply.setUserId(Integer.parseInt(userId));
+			servApply.setUserId(userId);
 			
-			servApply.setClientId(Integer.parseInt(clientId));
+			servApply.setClientId(clientId);
 			servApply.setPbclientName(pbclientName);
-			servApply.setMobilePhone(Integer.parseInt(mobilePhone));
+			servApply.setMobilePhone(mobilePhone);
 			servApply.setApplyQuatt(applyQuatt);
 			servApply.setFileUrl1(fileUrl1);
 			servApply.setFileUrl2(fileUrl2);
@@ -212,7 +219,7 @@ public class ServApplyAction extends BaseAction {
 	}
 	
 	/**
-	 * ids为组合键（serNo,business).
+	 * ids为组合键（seqNo,business).
 	 */
 	public void deleteServApply(){
 		try {

@@ -30,14 +30,14 @@ public class ServApplyServiceImpl implements ServApplyService {
 	}
 	
 	
-	public PbmsServApply findServApply(String serNo)
+	public PbmsServApply findServApply(String seqNo)
 			throws AppException {
 		try {
-			log.info("---findServApply by key serNo: "+serNo);
-			return servApplyDao.selectServApply(serNo);
+			log.info("---findServApply by key seqNo: "+seqNo);
+			return servApplyDao.selectServApply(seqNo);
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			throw new AppException("E000011",new String[]{serNo});
+			throw new AppException("E000011",new String[]{seqNo});
 		}
 	}
 	

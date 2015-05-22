@@ -9,7 +9,7 @@ import com.cmbc.pbms.dto.QueryServApplyDto;
 
 public interface ServApplyService {
 	public EasyGridList<PbmsServApply> findServApplys(QueryServApplyDto queryDto)throws AppException;
-	public PbmsServApply findServApply(String serNo)throws AppException;
+	public PbmsServApply findServApply(String seqNo)throws AppException;
 	public void deleteServApply(String idstr) throws AppException;
 	public void saveServApply(PbmsServApply servApply) throws AppException;
 	public void modifyServApply(PbmsServApply servApply) throws AppException;

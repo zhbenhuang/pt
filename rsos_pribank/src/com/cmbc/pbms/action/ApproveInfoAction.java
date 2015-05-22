@@ -60,7 +60,15 @@ public class ApproveInfoAction extends BaseAction {
 			EasyGridList<PbmsApproveInfo> ulist = approveInfoService.findApproveInfos(queryDto);
 			if(ulist != null && ulist.getRows()!= null){
 				for (PbmsApproveInfo temp : ulist.getRows()) {
-					temp.setOpt("<button onclick=\"cancel('"+temp.getApprId()+"');\">终止</button>&nbsp;<button onclick=\"pass('"+temp.getApprId()+"');\">通过</button>&nbsp;<button onclick=\"pass('"+temp.getApprId()+"');\">不通过</button>");
+					if(temp.getApprStatus() == 1){
+						temp.setOpt("<a class=\"easyui-linkbutton\" onclick=\"pass('"+temp.getApprId()+"');\"><span style=color:green;>审批</span></a>&nbsp;<a class=\"easyui-linkbutton\" onclick=\"cancel('"+temp.getApprId()+"');\"><span style=color:green;>终止</span></a>&nbsp;");
+					}else if(temp.getApprStatus() == 2){
+						temp.setOpt("<span style=color:black;>审批通过</span>");
+					}else if(temp.getApprStatus() == 3){
+						temp.setOpt("<span style=color:black;>审批不通过</span>");
+					}else if(temp.getApprStatus() == 4){
+						temp.setOpt("<span style=color:black;>终止</span>");
+					}
 				}
 			}
 			ulist.setRetCode(Constants.RETCODE_00000);
