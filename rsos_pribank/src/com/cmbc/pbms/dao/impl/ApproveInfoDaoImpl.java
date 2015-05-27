@@ -41,7 +41,9 @@ public class ApproveInfoDaoImpl extends EasyBaseDaoImpl<PbmsApproveInfo> impleme
             	hasWhere = appendLikeOrEquals(fromSql, params, "b.APPR_TYPE", queryDto.getApprType(),hasWhere);
             	hasWhere = appendLikeOrEquals(fromSql, params, "b.APPR_STATUS", queryDto.getApprStatus(),hasWhere);
             	hasWhere = appendLikeOrEquals(fromSql, params, "b.APPLY_USER_ID", queryDto.getApplyUserId(),hasWhere);
-				//TODO 日期
+				//TODO 申请时间-日期
+            	hasWhere = appendGreaterEquals(fromSql, params, "b.APPLY_TIME", queryDto.getApplyTimeBeg(),hasWhere);
+            	hasWhere = appendLowerEquals(fromSql, params, "b.APPLY_TIME", queryDto.getApplyTimeEnd(),hasWhere);
             	
             	StringBuilder sqlCount = new StringBuilder("select count(1) as rowCnt ").append(fromSql.toString());
 				Query queryCount = session.createSQLQuery(sqlCount.toString())

@@ -41,6 +41,9 @@
 			striped: true ,
 			loadMsg: '数据正在加载,请耐心的等待...' ,
 			rownumbers:true ,
+			frozenColumns:[[
+				{field:'ck' ,width:1 ,checkbox: false}
+			]],
 			onLoadSuccess: function (data){					
 				LG.showMsg("查询结果提示",data.retCode,data.message,false);
 			},
@@ -95,14 +98,38 @@
 			pageSize: 20 ,
 			pageList:[10,20,50] ,
 			toolbar:[
-			       	 
 			]
 		});
 		
 		$('#searchbtn').click(function(){
 			$('#t_approveInfo').datagrid('load' ,serializeForm($('#mysearch')));
 		});
-							
+		$('#applyTimeBeg').datebox({
+            formatter: function (date) {
+                var y = date.getFullYear();
+                var m = date.getMonth() + 1;
+                var d = date.getDate();
+                return y.toString() + (m < 10 ? ("0" + m.toString()) : m.toString()) + (d < 10 ? ("0" + d.toString()) : d.toString());
+            }
+	    });
+	    $('#applyTimeEnd').datebox({
+            formatter: function (date) {
+                var y = date.getFullYear();
+                var m = date.getMonth() + 1;
+                var d = date.getDate();
+                return y.toString() + (m < 10 ? ("0" + m.toString()) : m.toString()) + (d < 10 ? ("0" + d.toString()) : d.toString());
+            }
+	    });
+		
+		$.extend($.fn.validatebox.defaults.rules, {
+			idnum: { 
+        		validator: function (value) {
+        			var reg = /^[1-9]d*$/;
+            		return reg.test(value);
+        		},
+        		message: '必须是整数.'
+    		}
+		});
 	});
 	//js方法：序列化表单 			
 	function serializeForm(form){
@@ -125,12 +152,24 @@
 		<div region="north" style="width: 100%;height:65%" >
 		<br/>
 		<form id="mysearch" method="post">  
-			&nbsp;审批流水号:&nbsp;<input name="apprId" type="text" size="10" class="input-style"/>
-			&nbsp;审批类型:&nbsp;<input name="apprType" type="text" size="15" class="input-style"/>
-			&nbsp;审批状态:&nbsp;<input name="apprStatus" type="text" size="15" class="input-style"/>
-			&nbsp;申请人ID:&nbsp;<input name="applyUserId" type="text" size="15" class="input-style"/>
-			&nbsp;开始日期:&nbsp;<input name="applyTimeBeg" type="text" size="15" class="input-style"/>
-			&nbsp;结束日期:&nbsp;<input name="applyTimeEnd" type="text" size="15" class="input-style"/>
+			&nbsp;审批流水号:&nbsp;<input name="apprId" type="text" size="15" class="easyui-validatebox" validType="idnum"/>
+			&nbsp;审批类型:&nbsp;<select id="apprType" class="" name="apprType">
+		    					<option value=""></option>
+		    					<option value="1">用户变更审批</option>
+		    					<option value="2">客户变更审批</option>
+		    					<option value="3">机构变更审批</option>
+		    					<option value="4">活动创建审批</option>
+		    					<option value="5">活动报名审批</option>
+		    				</select>
+			&nbsp;审批状态:&nbsp;<select id="apprStatus" class="" name="apprStatus">
+		    					<option value=""></option>
+		    					<option value="1">审批中</option>
+		    					<option value="2">审批通过</option>
+		    					<option value="3">审批不通过</option>
+		    					<option value="4">终止</option>
+		    				</select>
+			&nbsp;申请人ID:&nbsp;<input name="applyUserId" type="text" size="12" class="input-style"/>
+			&nbsp;申请日期:&nbsp;<input name="applyTimeBeg" id="applyTimeBeg" class="easyui-databox" value="" />&nbsp;到&nbsp;<input name="applyTimeEnd" id="applyTimeEnd" class="easyui-databox" value=""/>
 			&nbsp;<a href="javascript:void(0)" id="searchbtn" class="easyui-linkbutton">查询</a>
 			</form>
 		</div>

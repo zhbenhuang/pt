@@ -11,6 +11,8 @@ public class QueryApproveInfoDto implements Serializable {
 	private String apprType;
 	private String apprStatus;
 	private String applyUserId;
+	private String applyTimeBeg;
+	private String applyTimeEnd;
 	
 	public PageDto getPageDto() {
 		return pageDto;
@@ -41,6 +43,18 @@ public class QueryApproveInfoDto implements Serializable {
 	}
 	public void setApplyUserId(String applyUserId) {
 		this.applyUserId = applyUserId;
+	}
+	public String getApplyTimeBeg() {
+		return applyTimeBeg;
+	}
+	public void setApplyTimeBeg(String applyTimeBeg) {
+		this.applyTimeBeg = applyTimeBeg;
+	}
+	public String getApplyTimeEnd() {
+		return applyTimeEnd;
+	}
+	public void setApplyTimeEnd(String applyTimeEnd) {
+		this.applyTimeEnd = applyTimeEnd;
 	}
 		
 }

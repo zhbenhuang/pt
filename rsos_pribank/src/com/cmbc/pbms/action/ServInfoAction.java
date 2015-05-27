@@ -1,6 +1,12 @@
 package com.cmbc.pbms.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
@@ -14,6 +20,7 @@ import rsos.framework.easyui.EasyResult;
 import rsos.framework.exception.AppException;
 import rsos.framework.struts2.BaseAction;
 import rsos.framework.utils.CalendarUtil;
+import rsos.framework.utils.UploadConfigurationRead;
 
 import com.cmbc.pbms.bean.PbmsServInfo;
 import com.cmbc.pbms.dto.QueryServInfoDto;
@@ -50,6 +57,7 @@ public class ServInfoAction extends BaseAction {
 			QueryServInfoDto queryDto = new QueryServInfoDto();
 			queryDto.setPageDto(initPageParameters());
 			queryDto.setSerId(serId);
+			if(serName != null && serName.length() > 0) serName = "%"+serName+"%";
 			queryDto.setSerName(serName);
 			
 			String path = getHttpRequest().getContextPath();
@@ -118,7 +126,7 @@ public class ServInfoAction extends BaseAction {
 			
 			Users user = (Users)getSession().getAttribute(GlobalConstants.USER_INFORMATION_KEY);
 			String userId = user.getUserId();//getHttpRequest().getParameter("userId");
-			String alterTime_DateTimeString = CalendarUtil.formatDatetime(new Date(), CalendarUtil.UP_ITEM_DATEFORMAT_DATE);
+			String alterTime_DateTimeString = CalendarUtil.formatDatetime(new Date(), CalendarUtil.DATEFORMAT_YYYYMMDD_HHmmss);
 			String alterTime = alterTime_DateTimeString;//getHttpRequest().getParameter("alterTime");
 			
 			PbmsServInfo oldServInfo = servInfoService.findServInfo(serId+"");
@@ -142,6 +150,29 @@ public class ServInfoAction extends BaseAction {
 				servInfo.setUserId(userId);
 				servInfo.setAlterTime(alterTime);
 				servInfoService.saveServInfo(servInfo);	
+				//copy file
+				File fileDir_new = new File(getSavePath()+"/new");
+				if(fileDir_new.exists()){
+					File fileDir_xx = new File(getSavePath()+"/"+servInfo.getSerId());
+					if(!fileDir_xx.exists()){
+						fileDir_xx.mkdirs();
+					}else{
+						UploadServInfoFileAction.cleanDir(fileDir_xx);
+					}
+					String serPic_sourceFullPath = getSavePath()+"/new/"+UploadServInfoFileAction.getTmpPath("0");
+					String serPic_targetFullPath = getSavePath()+"/"+servInfo.getSerId()+"/"+UploadServInfoFileAction.getTmpPath("0");
+					copyFile(servInfo.getSerPic(), serPic_sourceFullPath, serPic_targetFullPath);
+					
+					String fileUrl1_sourceFullFileName = getSavePath()+"/new/"+UploadServInfoFileAction.getTmpPath("1");
+					String fileUrl1_targetFullFileName = getSavePath()+"/"+servInfo.getSerId()+"/"+UploadServInfoFileAction.getTmpPath("1");
+					copyFile(servInfo.getFileUrl1(), fileUrl1_sourceFullFileName, fileUrl1_targetFullFileName);
+					
+					String fileUrl2_sourceFullFileName = getSavePath()+"/new/"+UploadServInfoFileAction.getTmpPath("2");
+					String fileUrl2_targetFullFileName = getSavePath()+"/"+servInfo.getSerId()+"/"+UploadServInfoFileAction.getTmpPath("2");
+					copyFile(servInfo.getFileUrl2(), fileUrl2_sourceFullFileName, fileUrl2_targetFullFileName);
+					
+					UploadServInfoFileAction.cleanDir(fileDir_new);
+				}
 				EasyResult result = new EasyResult(Constants.RETCODE_00000,
 						getText(Constants.RETCODE_00000));
 				writeJsonSuccess(result.toJson());
@@ -153,6 +184,33 @@ public class ServInfoAction extends BaseAction {
 			writeErrors(Constants.RETCODE_999999);
 			e.printStackTrace();
 		}
+	}
+	private String getSavePath() {
+		return UploadConfigurationRead.getInstance().getConfigItem("uploadServInfoPath").trim();
+	}
+
+	public static void copyFile(String fileName, String sourceFullPath,
+			String targetFullPath) throws FileNotFoundException,
+			IOException {
+		File sourceDir = new File(sourceFullPath);
+		if(!sourceDir.exists()){
+			System.out.println("when copy file, souce dir("+sourceFullPath+") not found!");
+			return ;
+		}
+		File targetDir = new File(targetFullPath);
+		if(!targetDir.exists()){
+			targetDir.mkdirs();
+		}
+		FileOutputStream fos=new FileOutputStream(targetFullPath+"/"+fileName);
+		FileInputStream fis=new FileInputStream(sourceFullPath+"/"+fileName);
+		byte []buffers=new byte[1024];
+		int len=0;
+		while((len=fis.read(buffers))!=-1){
+			fos.write(buffers,0,len);
+		}
+		fos.flush();
+		fos.close();
+		fis.close();
 	}
 	
 	public void modifyServInfo(){
@@ -173,7 +231,7 @@ public class ServInfoAction extends BaseAction {
 			String fileUrl2 = getHttpRequest().getParameter("fileUrl2");
 			Users user = (Users)getSession().getAttribute(GlobalConstants.USER_INFORMATION_KEY);
 			String userId = user.getUserId();//getHttpRequest().getParameter("userId");
-			String alterTime_DateTimeString = CalendarUtil.formatDatetime(new Date(), CalendarUtil.UP_ITEM_DATEFORMAT_DATE_2);
+			String alterTime_DateTimeString = CalendarUtil.formatDatetime(new Date(), CalendarUtil.DATEFORMAT_YYYYMMDD_HHmmss);
 			String alterTime = alterTime_DateTimeString;//getHttpRequest().getParameter("alterTime");
 			
 			PbmsServInfo servInfo = servInfoService.findServInfo(serId);
@@ -214,7 +272,16 @@ public class ServInfoAction extends BaseAction {
 			String ids = getHttpRequest().getParameter("ids");
 			log.info("---ids is: "+ids);
 		    servInfoService.deleteServInfo(ids);
-			EasyResult result = new EasyResult(Constants.RETCODE_00000,
+		    if(ids != null){
+		    	String[] arrays = ids.split(",");
+		    	for (String serId : arrays) {
+		    		File fileDir_xx = new File(getSavePath()+"/"+serId);
+		    		UploadServInfoFileAction.cleanDir(fileDir_xx);
+		    		fileDir_xx.delete();
+		    	}
+		    }
+		    
+		    EasyResult result = new EasyResult(Constants.RETCODE_00000,
 						getText(Constants.RETCODE_00000));
 			log.info(getText(Constants.RETCODE_00000)+"---"+result.toJson());
 			writeJsonSuccess(result.toJson());

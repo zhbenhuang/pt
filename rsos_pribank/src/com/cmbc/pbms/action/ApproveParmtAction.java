@@ -149,7 +149,7 @@ public class ApproveParmtAction extends BaseAction {
 			String stepRole5 = getHttpRequest().getParameter("stepRole5");
 			Users user = (Users)getSession().getAttribute(GlobalConstants.USER_INFORMATION_KEY);
 			String userId = user.getUserId();//getHttpRequest().getParameter("userId");
-			String alterTime_DateTimeString = CalendarUtil.formatDatetime(new Date(), CalendarUtil.UP_ITEM_DATEFORMAT_DATE_2);
+			String alterTime_DateTimeString = CalendarUtil.formatDatetime(new Date(), CalendarUtil.DATEFORMAT_YYYYMMDD_HHmmss);
 			String alterTime = alterTime_DateTimeString;//getHttpRequest().getParameter("alterTime");
 			
 			PbmsApproveParmt approveParmt = approveParmtService.findApproveParmt(apprType);

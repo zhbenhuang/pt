@@ -237,6 +237,7 @@ if(jQuery)(
 		},
 		uploadifyUpload:function(ID) {
 			jQuery(this).each(function() {
+				var tmpObj = document.getElementById(jQuery(this).attr('id') + 'Uploader');
 				document.getElementById(jQuery(this).attr('id') + 'Uploader').startFileUpload(ID, false);
 			});
 		},

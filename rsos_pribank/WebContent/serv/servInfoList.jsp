@@ -14,18 +14,23 @@
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<link href="css/default.css" rel="stylesheet" type="text/css" />
+	<link href="css/uploadify.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
-	<script type="text/javascript" src="js/jquery-easyui-1.3.1/jquery-1.8.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.3.1/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.3.1/themes/icon.css" />
+	<script type="text/javascript" src="js/jquery-easyui-1.3.1/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="js/jquery-easyui-1.3.1/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="js/jquery-easyui-1.3.1/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="js/commons.js"></script>
 	<script type="text/javascript" src="js/vobCombox.js"></script>
-	<script type="text/javascript" src="js/LG.js"></script>		
+	<script type="text/javascript" src="js/LG.js"></script>	
+	<script type="text/javascript" src="js/swfobject.js"></script>
+	<script type="text/javascript" src="js/jquery.uploadify.v2.0.1.js"></script>
 	<script type="text/javascript">
-	var actionMethod="saveServInfo";		//判断新增和修改方法 
+	var actionMethod="saveServInfo";		
+	var currentSerId="";
 	$(function(){
 		var business = <%=business%>;
 		$('#newServInfoDialog').dialog({
@@ -57,7 +62,7 @@
 				showErrorMessage(xhr);
 			},
 			columns:[[
-				{field:'serPic' ,title:'图片',width:50,align:'center',formatter:function(value,row,index){return '<img src="d:/temp/'+row.serPic+'" />';}},
+				{field:'serPic' ,title:'图片',width:50,align:'center',formatter:function(value,record,index){return '<img src="downloadServInfoFile!getFile.action?serId='+record.serId+'&fileType=0" height="20" width="30" />';}},
 				{field:'serId' ,title:'活动ID' ,width:50 ,align:'center'},
 				{field:'serName' ,title:'活动名称' ,width:50 ,align:'center'},
 				{field:'serDes' ,title:'活动描述' ,width:100 ,align:'center'},
@@ -162,14 +167,98 @@
 		$('#searchbtn').click(function(){
 			$('#t_servInfo').datagrid('load' ,serializeForm($('#mysearch')));
 		});
-							
+				
 		$('#clearbtn').click(function(){
 			$('#mysearch').form('clear');
 			$('#t_servInfo').datagrid('load' ,{});
 		});
 		
+		$("#uploadifyPic").uploadify({
+			'uploader'       : 'js/uploadify.swf',
+			'script'         : 'uploadServInfoFile.action?',
+			'scriptData'	 : {'serId':-1},
+			'cancelImg'      : 'img/cancel.png',
+			'folder'         : 'uploads',
+			'queueID'        : 'fileQueuePic',
+			'fileDataName'   : 'fileName',  
+			'auto'           : false,
+			'multi'          : false,
+			'simUploadLimit' : 1,
+			'buttonText'	 : '浏览图片',
+			'fileExt'        : '*.jpg;*.gif;*.png;*.bmp;',
+			'multi'          : true,
+			'queueSizeLimit' : 1,
+			'sizeLimit'      : 1024000,
+			onSelect		 : function(e, queueId, fileObj) {
+				$('#uploadifyPic').uploadifySettings('scriptData', {'serId':$("#serIdNew").val(), 'fileType':0});
+			},
+			onComplete		 : function(event, ID, fileObj, response, data){
+				$("#serPic").val(fileObj.name);
+				$("#imgSerPic").attr("src","downloadServInfoFile!getFile.action?serId="+$("#serIdNew").val()+"&fileType=0&fileName="+fileObj.name);
+			}
+		});
+		$("#uploadify").uploadify({
+			'uploader'       : 'js/uploadify.swf',
+			'script'         : 'uploadServInfoFile.action?',
+			'scriptData'	 : {'serId':-1},
+			'cancelImg'      : 'img/cancel.png',
+			'folder'         : 'uploads',
+			'queueID'        : 'fileQueueFile1',
+			'fileDataName'   : 'fileName',  
+			'auto'           : false,
+			'multi'          : false,
+			'simUploadLimit' : 1,
+			'buttonText'	 : '浏览文件',
+			'fileExt'        : '*.jpg;*.gif;*.png;*.bmp;*.doc;*.pdf;*.rar;*.xls',
+			'multi'          : true,
+			'queueSizeLimit' : 1,
+			'sizeLimit'      : 10240000,
+			onSelect		 : function(e, queueId, fileObj) {
+				$('#uploadify').uploadifySettings('scriptData', {'serId':$("#serIdNew").val(), 'fileType':1});
+			},
+			onComplete		 : function(event, ID, fileObj, response, data){
+				$("#fileUrl1").val(fileObj.name);
+				$("#showFile1").empty();
+				$("#showFile1").append( "<a href=downloadServInfoFile!getFile.action?serId="+$("#serIdNew").val()+"&fileType=1&fileName="+fileObj.name+">"+fileObj.name+"</a><br/>");
+				
+			}
+		});
+		$("#uploadifyFile2").uploadify({
+			'uploader'       : 'js/uploadify.swf',
+			'script'         : 'uploadServInfoFile.action?',
+			'scriptData'	 : {'serId':-1},
+			'cancelImg'      : 'img/cancel.png',
+			'folder'         : 'uploads',
+			'queueID'        : 'fileQueueFile2',
+			'fileDataName'   : 'fileName',  
+			'auto'           : false,
+			'multi'          : false,
+			'simUploadLimit' : 1,
+			'buttonText'	 : '浏览文件',
+			'fileExt'        : '*.jpg;*.gif;*.png;*.bmp;*.doc;*.pdf;*.rar;*.xls',
+			'multi'          : true,
+			'queueSizeLimit' : 1,
+			'sizeLimit'      : 10240000,
+			onSelect		 : function(e, queueId, fileObj) {
+				$('#uploadifyFile2').uploadifySettings('scriptData', {'serId':$("#serIdNew").val(), 'fileType':2});
+			},
+			onComplete		 : function(event, ID, fileObj, response, data){
+				$("#fileUrl2").val(fileObj.name);
+				$("#showFile2").empty();
+				$("#showFile2").append( "<a href=downloadServInfoFile!getFile.action?serId="+$("#serIdNew").val()+"&fileType=2&fileName="+fileObj.name+">"+fileObj.name+"</a><br/>");
+			}
+		});
 		
-
+		$.extend($.fn.validatebox.defaults.rules, {
+			idnum: { 
+        		validator: function (value) {
+        			var reg = /^[1-9]d*$/;
+            		return reg.test(value);
+        		},
+        		message: '必须是整数.'
+    		}
+		});		
+		
 	});
 	
 	function addServInfo(){
@@ -181,8 +270,14 @@
 		$('#newServInfoDialog').dialog('open');
 		
 		$('#userIdSearch').removeAttr("readonly");
-		$('#newServInfoForm').form('load',{});
-		
+		$('#newServInfoForm').form('load',{
+			bigType:"1",
+			bigTypeHidden:"1",
+			smlType:"1",
+			smlTypeHidden:"1"
+		});
+		$("#showFile1").empty();
+		$("#showFile2").empty();
 	}
 	
 	function modifyServInfo(){
@@ -210,8 +305,16 @@
 				serValue:grid[0].serValue,
 				serAmount:grid[0].serAmount,
 				begTime:grid[0].begTime,
-				endTime:grid[0].endTime
+				endTime:grid[0].endTime,
+				fileUrl1:grid[0].fileUrl1,
+				fileUrl2:grid[0].fileUrl2
+				
 			});
+			$("#imgSerPic").attr("src","downloadServInfoFile!getFile.action?serId="+grid[0].serId+"&fileType=0&fileName="+grid[0].serPic);
+			$("#showFile1").empty();
+			$("#showFile1").append( "<a href=downloadServInfoFile!getFile.action?serId="+grid[0].serId+"&fileType=1&fileName="+grid[0].fileUrl1+">"+grid[0].fileUrl1+"</a><br/>");
+			$("#showFile2").empty();
+			$("#showFile2").append( "<a href=downloadServInfoFile!getFile.action?serId="+grid[0].serId+"&fileType=2&fileName="+grid[0].fileUrl2+">"+grid[0].fileUrl2+"</a><br/>");
 		}
 	}
 	
@@ -225,7 +328,7 @@
 					var ids = '';
 					for(var i =0 ;i<grid.length;i++){
 						ids += grid[i].serId + ',' ;
-						ids += "'"+grid[i].serId+grid[i].bigType + "',";
+						//ids += "'"+grid[i].serId+grid[i].bigType + "',";
 					}
 					if(i>0){
 						ids = ids.substring(0 , ids.length-1);
@@ -252,7 +355,6 @@
 	}
 
 	
-	
 	//js方法：序列化表单 			
 	function serializeForm(form){
 		var obj = {};
@@ -274,7 +376,7 @@
 		<div region="north" style="width: 100%;height:65%" >
 		<br/>
 		<form id="mysearch" method="post">  
-			&nbsp;标的ID:&nbsp;<input name="serId" type="text" size="10" class="input-style"/>
+			&nbsp;标的ID:&nbsp;<input name="serId" type="text" size="10" class="easyui-validatebox" validType="idnum"/>
 			&nbsp;标的名称:&nbsp;<input name="serName" type="text" size="15" class="input-style"/>
 			&nbsp;<a href="javascript:void(0)" id="searchbtn" class="easyui-linkbutton">查询</a>
 			&nbsp;<a href="javascript:void(0)" id="clearbtn" class="easyui-linkbutton">清空</a>
@@ -287,71 +389,85 @@
 	
 	
   	
-  	<div id="newServInfoDialog" title="新增标的" class="easyui-dialog" style="width:600px;height:500px;background-color:#E4F5EF;"  
+  	<div id="newServInfoDialog" title="新增标的" class="easyui-dialog" style="width:600px;height:700px;background-color:#E4F5EF;"  
         data-options="iconCls:'icon-save',modal:true,draggable:true,closed:true">
 		<form id="newServInfoForm" action="" method="post"  align="center">
-		<input id="serIdNew" name="serId" type="hidden" value=""  />
+		<input id="serIdNew" name="serId" type="hidden" value=""  required=true/>
 		<br/>
 		<table align="center" width="90%" border="1" style="background-color:#E4F5EF;">
 			<tr>
 				<td align="right">标的名称:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="serName" type="text" class="easyui-validatebox" required=true missingMessage="标的名称不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left" colspan="3"><input name="serName" type="text" class="easyui-validatebox" required=true missingMessage="标的名称不可为空!" style="width:90%;height:22px;border:1px solid #A4BED4;" value="" /></td>
+				
 			</tr>
 			<tr>
 				<td align="right">标的大类&nbsp;<font color="red">*</font></td>
 				<td align="left">
 					<input name="bigTypeHidden" id="bigTypeHidden" type="hidden"/>
-					<input name="bigType" id="bigType" style="width:142px" class="easyui-combobox" required=true  missingMessage="标的大类必选!" panelHeight="auto"
+					<input name="bigType" id="bigType" style="width:138px" class="easyui-combobox" required=true  missingMessage="标的大类必选!" panelHeight="auto"
 						data-options="valueField:'id',textField:'text',data:selectBigType" />
 				</td>
-			</tr>
-			<tr>
 				<td align="right">标的小类&nbsp;<font color="red">*</font></td>
 				<td align="left">
 					<input name="smlTypeHidden" id="smlTypeHidden" type="hidden"/>
-					<input name="smlType" id="smlType" style="width:142px" class="easyui-combobox" required=true  missingMessage="标的大类必选!" panelHeight="auto"
+					<input name="smlType" id="smlType" style="width:138px" class="easyui-combobox" required=true  missingMessage="标的大类必选!" panelHeight="auto"
 						data-options="valueField:'id',textField:'text',data:selectSmlType" />
 				</td>
 			</tr>
 			<tr>
 				<td align="right">价格:&nbsp;<font color="red">*</font></td>
 				<td align="left"><input name="serValue" type="text" class="easyui-validatebox" required=true missingMessage="价格不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
-			</tr>
-			<tr>
 				<td align="right">数量:&nbsp;<font color="red">*</font></td>
 				<td align="left"><input name="serAmount" type="text" class="easyui-validatebox" required=true missingMessage="数量不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
 			</tr>
 			<tr>
 				<td align="center">生效时间&nbsp;<font color="red">*</font></td>
 				<td><input type="text" id="begTime" name="begTime" class="easyui-datebox" required=true missingMessage="生效时间不能为空" style="height:22px;border:1px solid #A4BED4;" value=""/></td>
-			</tr>
-			<tr>
 				<td align="center">失效时间&nbsp;<font color="red">*</font></td>
 				<td><input type="text" id="endTime" name="endTime" class="easyui-datebox" required=true missingMessage="失效时间不能为空" style="height:22px;border:1px solid #A4BED4;" value=""/></td>
 			</tr>
 			<tr>
 				<td align="right">标的描述:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="serDes" type="text" class="easyui-validatebox" required=true missingMessage="标的描述不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left" colspan="3"><input name="serDes" type="text" class="easyui-validatebox" required=true missingMessage="标的描述不可为空!" style="height:42px;width:400px;border:1px solid #A4BED4;" value="" /></td>
 			</tr>
 			<tr>
 				<td align="right">标的图片:&nbsp;<font color="red">*</font></td>
-				<td align="left">
-				<input name="serPic" type="text" class="easyui-validatebox" required=true missingMessage="标的图片不可为空!" value="" />
-				<input name="uploadSerPic" type="file" class="easyui-validatebox" required=true missingMessage="标的图片不可为空!" value="" />
+				<td align="left" colspan="3">
+					<input id="serPic" name="serPic" type="hidden" value=""  required=true/>
+					<img id="imgSerPic" src="downloadServInfoFile!getSerPic.action?serId=&fileType=0" height="20" width="30" />
+					<div id="fileQueuePic"></div>
+					<input type="file" name="uploadifyPic" id="uploadifyPic" />
+					<p>
+					<a id="confirmUploadPic" class="easyui-linkbutton" href="javascript:jQuery('#uploadifyPic').uploadifyUpload()">开始上传</a>
+					<a id="cancelUploadPic" class="easyui-linkbutton" href="javascript:jQuery('#uploadifyPic').uploadifyClearQueue()">取消上传</a>
+					</p>
 				</td>
 			</tr>
 			<tr>
-				<td align="right">标的附件一:&nbsp;<font color="red">*</font></td>
-				<td align="left">
-				<input name="fileUrl1" type="text" value="" />
-				<input name="uploadFileUrl1" type="file" value="" />
+				<td align="right">标的附件一</td>
+				<td align="left" colspan="3">
+					<input id="fileUrl1" name="fileUrl1" type="hidden" value=""  required=true/>
+		
+					<div id="showFile1"></div>
+					<div id="fileQueueFile1" ></div>
+					<input type="file" name="uploadify" id="uploadify" />
+					<p>
+					<a id="confirmUpload" class="easyui-linkbutton" href="javascript:jQuery('#uploadify').uploadifyUpload()">开始上传</a>
+					<a id="cancelUpload" class="easyui-linkbutton" href="javascript:jQuery('#uploadify').uploadifyClearQueue()">取消上传</a>
+					</p>	
 				</td>
 			</tr>
 			<tr>
-				<td align="right">标的附件二:&nbsp;<font color="red">*</font></td>
-				<td align="left">
-				<input name="fileUrl2" type="text" value="" />
-				<input name="uploadFileUrl2" type="file" value="" />
+				<td align="right">标的附件二</td>
+				<td align="left" colspan="3">
+					<input id="fileUrl2" name="fileUrl2" type="hidden" value=""  required=true/>
+					<div id="showFile2"></div>
+					<div id="fileQueueFile2" ></div>
+					<input type="file" name="uploadifyFile2" id="uploadifyFile2" />
+					<p>
+					<a id="confirmUploadFile2" class="easyui-linkbutton" href="javascript:jQuery('#uploadifyFile2').uploadifyUpload()">开始上传</a>
+					<a id="cancelUploadFile2" class="easyui-linkbutton" href="javascript:jQuery('#uploadifyFile2').uploadifyClearQueue()">取消上传</a>
+					</p>	
 				</td>
 			</tr>
 			<tr align="center">
@@ -361,7 +477,9 @@
 				</td>
 			</tr>
 		</table>
-		</form> 			
+		</form> 	
+		
 	</div>
+	
   </body>
 </html>

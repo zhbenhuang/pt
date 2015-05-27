@@ -88,7 +88,15 @@
 			$('#t_struValue').datagrid('load' ,{});
 		});
 		
-		
+		$.extend($.fn.validatebox.defaults.rules, {
+			idnum: { 
+        		validator: function (value) {
+        			var reg = /^[1-9]d*$/;
+            		return reg.test(value);
+        		},
+        		message: '必须是整数.'
+    		}
+		});
 
 	});
 	
@@ -114,7 +122,7 @@
 		<div region="north" style="width: 100%;height:65%" >
 		<br/>
 		<form id="mysearch" method="post">  
-			&nbsp;机构ID:&nbsp;<input name="struId" type="text" size="10" class="input-style"/>
+			&nbsp;机构ID:&nbsp;<input name="struId" type="text" size="10" class="easyui-validatebox" validType="idnum"/>
 			&nbsp;积分期数:&nbsp;<input name="term" type="text" size="15" class="input-style"/>
 			&nbsp;<a href="javascript:void(0)" id="searchbtn" class="easyui-linkbutton">查询</a>
 			</form>

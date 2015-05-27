@@ -7,7 +7,15 @@
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 
-	
+	<package name="uploadServInfo" extends="json-default">  
+        <action name="uploadServInfoFile" class="com.cmbc.pbms.action.UploadServInfoFileAction">  
+            <result name="success" type="json"></result>
+        </action>  
+        <action name="downloadServInfoFile" class="com.cmbc.pbms.action.DownloadServInfoFileAction">  
+            <result name="success" type="json"></result>
+        </action>  
+    </package>  
+    
 	<package name="servInfo" namespace="" extends="json-default">		
 		<action name="queryServInfoList" class="com.cmbc.pbms.action.ServInfoAction">
  			<result name="success" type="json"></result>
@@ -49,6 +57,9 @@
 			<result name="success" type="json"></result>
 		</action>
  		<action name="deleteApproveInfo" class="com.cmbc.pbms.action.ApproveInfoAction">
+ 			<result name="success" type="json"></result>
+ 		</action>
+ 		<action name="checkApproveInfo" class="com.cmbc.pbms.action.ApproveInfoAction">
  			<result name="success" type="json"></result>
  		</action>
 	</package>

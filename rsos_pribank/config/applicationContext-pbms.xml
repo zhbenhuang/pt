@@ -19,6 +19,12 @@
 	http://www.springframework.org/schema/task/spring-task-3.0.xsd" >
 	
 	<!--Action-->
+	<bean id="downloadServInfoFileAction" class="com.cmbc.pbms.action.DownloadServInfoFileAction">
+		<property name="servInfoService" ref="servInfoService"></property>
+	</bean>	
+	<bean id="uploadServInfoFileAction" class="com.cmbc.pbms.action.UploadServInfoFileAction">
+		<property name="servInfoService" ref="servInfoService"></property>
+	</bean>	
 	<bean id="servInfoAction" class="com.cmbc.pbms.action.ServInfoAction">
 		<property name="servInfoService" ref="servInfoService"></property>
 	</bean>	

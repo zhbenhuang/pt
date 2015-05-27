@@ -52,7 +52,7 @@
 			loadMsg: '数据正在加载,请耐心的等待...' ,
 			rownumbers:true ,
 			frozenColumns:[[
-				{field:'ck' ,width:50 ,checkbox: true}
+				{field:'ck' ,width:1 ,checkbox: false}
 			]],
 			onLoadSuccess: function (data){					
 				LG.showMsg("查询结果提示",data.retCode,data.message,false);
@@ -61,7 +61,7 @@
 				showErrorMessage(xhr);
 			},
 			columns:[[
-				{field:'serPic' ,title:'图片' ,width:50 ,align:'center'},
+				{field:'serPic' ,title:'图片',width:50,align:'center',formatter:function(value,record,index){return '<img src="downloadServInfoFile!getFile.action?serId='+record.serId+'&fileType=0" height="20" width="30" />';}},
 				{field:'serId' ,title:'活动ID' ,width:50 ,align:'center'},
 				{field:'serName' ,title:'活动名称' ,width:50 ,align:'center'},
 				{field:'serDes' ,title:'活动描述' ,width:100 ,align:'center'},
@@ -69,27 +69,34 @@
 				{field:'serAmount' ,title:'剩余数量' ,width:30 ,align:'center'},
 				{field:'begTime' ,title:'生效时间' ,width:120 ,align:'center'},
 				{field:'endTime' ,title:'失效时间' ,width:120 ,align:'center'},
+				{field:'opt' ,title:'操作',width:50,align:'center',formatter:
+					function(value,record,index){
+						if(record.serAmount >= 1 ){
+							return '<button onclick="javascript:apply('+index+');" class="easyui-linkbutton"><span style=color:green;>申请兑换</span></button>';
+						}else{
+							return '<span style=color:black;>数量不足</span>';
+						}
+						return '';
+					}
+				}
 			]] ,
 			pagination: true , 
 			pageSize: 20 ,
 			pageList:[10,20,50] ,
 			toolbar:[	
-		         {
-		       		text:'申请兑换' ,
-		       		iconCls:'icon-my-add' , 
-					handler:'newServApply'
-		       	 }	   
 			]
 		});
 
 	});
 	
-	
-	function newServApply(){
+	function apply(rowNum){
+		if(rowNum){
+			$('#t_servInfo').datagrid('selectRow',rowNum);
+		}
 		actionMethod = 'newServApply';
 		var grid =$('#t_servInfo').datagrid('getSelections');
 		if(grid.length != 1){
-			LG.showWarn("提示信息","请选择一条记录修改标的!");
+			LG.showWarn("提示信息","请选择一条记录作兑换!");
 		} else {
 			$('#newServApplyDialog').dialog({
 				title:'申请兑换'
@@ -124,6 +131,7 @@
 						$.messager.alert('提示消息',result.message,'info',function(){
 							$('#newServApplyDialog').dialog('close');
 							$('#t_servInfo').datagrid('reload');
+							$('#t_servInfo').datagrid('unselectAll');	
 						});
 					}else{
 						LG.showError("提示信息",result.message);
@@ -137,6 +145,7 @@
 	
 	function doCancelAdd1(){
 		$('#newServApplyDialog').dialog('close');
+		$('#t_servInfo').datagrid('unselectAll');
 	}
 	
 	

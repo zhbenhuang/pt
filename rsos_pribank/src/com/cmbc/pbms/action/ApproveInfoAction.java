@@ -2,6 +2,9 @@ package com.cmbc.pbms.action;
 
 import java.util.Date;
 
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
+
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import rsos.framework.exception.AppException;
 import rsos.framework.struts2.BaseAction;
 import rsos.framework.utils.CalendarUtil;
 
+import com.cmbc.flow.bean.ProcessIns;
 import com.cmbc.pbms.bean.PbmsApproveInfo;
 import com.cmbc.pbms.dto.QueryApproveInfoDto;
 import com.cmbc.pbms.service.ApproveInfoService;
@@ -48,6 +52,8 @@ public class ApproveInfoAction extends BaseAction {
 			String apprType = getHttpRequest().getParameter("apprType");
 			String apprStatus = getHttpRequest().getParameter("apprStatus");
 			String applyUserId = getHttpRequest().getParameter("applyUserId");
+			String applyTimeBeg = getHttpRequest().getParameter("applyTimeBeg");
+			String applyTimeEnd = getHttpRequest().getParameter("applyTimeEnd");
 			
 			QueryApproveInfoDto queryDto = new QueryApproveInfoDto();
 			queryDto.setPageDto(initPageParameters());
@@ -55,10 +61,12 @@ public class ApproveInfoAction extends BaseAction {
 			queryDto.setApprType(apprType);
 			queryDto.setApprStatus(apprStatus);
 			queryDto.setApplyUserId(applyUserId);
+			queryDto.setApplyTimeBeg(applyTimeBeg);
+			queryDto.setApplyTimeEnd(applyTimeEnd);
 			
 			String path = getHttpRequest().getContextPath();
 			EasyGridList<PbmsApproveInfo> ulist = approveInfoService.findApproveInfos(queryDto);
-			if(ulist != null && ulist.getRows()!= null){
+			/*if(ulist != null && ulist.getRows()!= null){
 				for (PbmsApproveInfo temp : ulist.getRows()) {
 					if(temp.getApprStatus() == 1){
 						temp.setOpt("<a class=\"easyui-linkbutton\" onclick=\"pass('"+temp.getApprId()+"');\"><span style=color:green;>审批</span></a>&nbsp;<a class=\"easyui-linkbutton\" onclick=\"cancel('"+temp.getApprId()+"');\"><span style=color:green;>终止</span></a>&nbsp;");
@@ -70,7 +78,7 @@ public class ApproveInfoAction extends BaseAction {
 						temp.setOpt("<span style=color:black;>终止</span>");
 					}
 				}
-			}
+			}*/
 			ulist.setRetCode(Constants.RETCODE_00000);
 			ulist.setMessage(getText(Constants.RETCODE_00000));
 			log.info(getText(Constants.RETCODE_00000)+"---"+ulist.toJson());
@@ -100,6 +108,81 @@ public class ApproveInfoAction extends BaseAction {
 			e.printStackTrace();
 		} catch (Exception e) {
 			writeErrors(Constants.RETCODE_999999);
+			e.printStackTrace();
+		}
+	}
+	
+	public void checkApproveInfo2(){
+		try{
+			log.info("-------checkApproveInfo2--------");
+			printParameters();
+			String apprId = getHttpRequest().getParameter("apprId");
+			String apprStatus = getHttpRequest().getParameter("apprStatus");
+			
+			PbmsApproveInfo approveInfo = approveInfoService.findApproveInfo(apprId);
+			if(approveInfo == null) return ;
+			approveInfo.setApprStatus(Integer.parseInt(apprStatus));
+			approveInfoService.modifyApproveInfo(approveInfo);
+			EasyResult result = new EasyResult(Constants.RETCODE_00000,
+					getText(Constants.RETCODE_00000));
+			writeJsonSuccess(result.toJson());
+		}catch(AppException e){
+			writeErrors(e.getId());
+			e.printStackTrace();
+		} catch (Exception e) {
+			writeErrors(Constants.RETCODE_999999);
+			e.printStackTrace();
+		}
+	}
+	public void checkApproveInfo(){
+		String message = "";
+		try {
+			log.info("-------checkApproveInfo--------");
+			printParameters();
+			String apprStatus = getHttpRequest().getParameter("apprStatus");
+			String ids = getHttpRequest().getParameter("ids");
+			if(ids == null || ids.length()<=0){
+				return ;
+			}
+			String[] apprIds = ids.split(",");
+			if(apprIds == null){
+				return ;
+			}
+			int num = apprIds.length;
+			for (String apprId : apprIds) {
+				PbmsApproveInfo approveInfo = approveInfoService.findApproveInfo(apprId);
+				if(approveInfo == null) {
+					continue;
+				};
+				approveInfo.setApprStatus(Integer.parseInt(apprStatus));
+				approveInfoService.modifyApproveInfo(approveInfo);
+				num --;
+			}
+			
+			if(num == 0){
+				message = "{'message':'操作成功!','retCode':'"+Constants.RETCODE_00000+"'}";
+				JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(message);
+				this.writeJsonSuccess(jsonObject.toString());
+			}else if (num == apprIds.length){
+				message = "{'message':'可能无效!','retCode':'"+Constants.RETCODE_00000+"'}";
+				JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(message);
+				this.writeJsonSuccess(jsonObject.toString());
+			}else {
+				message = "{'message':'部分操作成功!','retCode':'"+Constants.RETCODE_00000+"'}";
+				JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(message);
+				this.writeJsonSuccess(jsonObject.toString());
+			}
+			
+			
+		} catch(AppException e){
+			message = "{'retCode':'"+Constants.RETCODE_999999+"'}";
+			JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(message);
+			this.writeJsonSuccess(jsonObject.toString());
+			e.printStackTrace();
+		} catch (Exception e) {
+			message = "{'retCode':'"+Constants.RETCODE_999999+"'}";
+			JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(message);
+			this.writeJsonSuccess(jsonObject.toString());
 			e.printStackTrace();
 		}
 	}

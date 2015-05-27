@@ -148,7 +148,40 @@
 			$('#t_approveParmt').datagrid('load' ,{});
 		});
 		
-		
+		$('#stepNum').change(function(e) { 
+			var value = $('#stepNum').val();
+			if(value == 1){
+				$('#sr1').show();
+				$('#sr2').hide();
+				$('#sr3').hide();
+				$('#sr4').hide();
+				$('#sr5').hide();
+			}else if(value == 2){
+				$('#sr1').show();
+				$('#sr2').show();
+				$('#sr3').hide();
+				$('#sr4').hide();
+				$('#sr5').hide();
+			}else if(value == 3){
+				$('#sr1').show();
+				$('#sr2').show();
+				$('#sr3').show();
+				$('#sr4').hide();
+				$('#sr5').hide();
+			}else if(value == 4){
+				$('#sr1').show();
+				$('#sr2').show();
+				$('#sr3').show();
+				$('#sr4').show();
+				$('#sr5').hide();
+			}else if(value == 5){
+				$('#sr1').show();
+				$('#sr2').show();
+				$('#sr3').show();
+				$('#sr4').show();
+				$('#sr5').show();
+			}
+		});
 
 	});
 	
@@ -162,8 +195,16 @@
 		
 		$('#apprTypeNew').removeAttr("readonly");
 		$('#newApproveParmtForm').form('load',{
-			
+			stepNum:"2",
+			stepNumHidden:"2",
+			apprSwitch:"1",
+			apprSwitchHidden:"1"
 		});
+		$('#sr1').show();
+		$('#sr2').show();
+		$('#sr3').hide();
+		$('#sr4').hide();
+		$('#sr5').hide();
 	}
 	
 	function modifyApproveParmt(){
@@ -184,6 +225,7 @@
 				apprSwitch:grid[0].apprSwitch,
 				apprSwitchHidden:grid[0].apprSwitch,
 				stepNum:grid[0].stepNum,
+				stepNumHidden:grid[0].stepNum,
 				stepRole1:grid[0].stepRole1,
 				stepRole1Hidden:grid[0].stepRole1,
 				stepRole2:grid[0].stepRole2,
@@ -210,7 +252,6 @@
 					var ids = '';
 					for(var i =0 ;i<grid.length;i++){
 						ids += grid[i].apprType + ',' ;
-						ids += "'"+grid[i].apprType + "',";
 					}
 					if(i>0){
 						ids = ids.substring(0 , ids.length-1);
@@ -266,12 +307,9 @@
   	<div id="newApproveParmtDialog" title="新增审批流程" class="easyui-dialog" style="width:300px;height:500px;background-color:#E4F5EF;"  
         data-options="iconCls:'icon-save',modal:true,draggable:true,closed:true">
 		<form id="newApproveParmtForm" action="" method="post"  align="center">
+		<input id="apprTypeNew" name="apprType" type="hidden" value="" />
 		<br/>
 		<table align="center" width="90%" border="1" style="background-color:#E4F5EF;">
-			<tr>
-				<td align="right">审批流程ID:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input id="apprTypeNew" name="apprType" type="hidden"  style="height:22px;border:1px solid #A4BED4;" value=""  /></td>
-			</tr>
 			<tr>
 				<td align="right">审批流程名称:&nbsp;<font color="red">*</font></td>
 				<td align="left"><input name="apprName" type="text" class="easyui-validatebox" required=true missingMessage="审批流程名称不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
@@ -288,29 +326,37 @@
 				<td align="right">审批步骤&nbsp;<font color="red">*</font></td>
 				<td align="left">
 					<input name="stepNumHidden" id="stepNumHidden" type="hidden"/>
-					<input name="stepNum" id="stepNum" style="width:142px" class="easyui-combobox" required=true  missingMessage="审批步数必选!" panelHeight="auto"
+					<!--  <input name="stepNum1" id="stepNum1" type="text" style="width:142px" class="easyui-combobox" required=true  missingMessage="审批步数必选!" panelHeight="auto"
 						data-options="valueField:'id',textField:'text',data:selectStepNum" />
+					-->
+					<select id="stepNum" class="" name="stepNum" style="width:142px">
+    					<option value="1">1</option>
+    					<option value="2">2</option>
+    					<option value="3">3</option>
+    					<option value="4">4</option>
+    					<option value="5">5</option>
+    				</select>
 				</td>
 			</tr>
-			<tr>
+			<tr id="sr1">
 				<td align="right">步骤一审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole1" type="text" class="easyui-validatebox" required=true missingMessage="角色1不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole1" id="stepRole1" type="text" class="easyui-validatebox" required=true missingMessage="角色1不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
 			</tr>
-			<tr>
+			<tr id="sr2">
 				<td align="right">步骤二审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole2" type="text" class="easyui-validatebox" required=true missingMessage="角色2不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole2" id="stepRole2" type="text" class="easyui-validatebox" required=true missingMessage="角色2不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
 			</tr>
-			<tr>
+			<tr id="sr3">
 				<td align="right">步骤三审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole3" type="text" class="easyui-validatebox" required=true missingMessage="角色3不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole3" id="stepRole3" type="text" class="easyui-validatebox" required=true missingMessage="角色3不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
 			</tr>
-			<tr>
+			<tr id="sr4">
 				<td align="right">步骤四审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole4" type="text" class="easyui-validatebox" required=true missingMessage="角色4不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole4" id="stepRole4" type="text" class="easyui-validatebox" required=true missingMessage="角色4不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
 			</tr>
-			<tr>
+			<tr id="sr5">
 				<td align="right">步骤五审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole5" type="text" class="easyui-validatebox" required=true missingMessage="角色5不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole5" id="stepRole5" type="text" class="easyui-validatebox" required=true missingMessage="角色5不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
 			</tr>
 			
 			

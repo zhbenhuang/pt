@@ -255,8 +255,8 @@ public class ProductAction extends FuncBaseAction {
 			JSONObject productJson = StringToJson(productObject).get(0);
 			String benefitDate = productJson.getString("benefitDate");
 			String dueDate = productJson.getString("dueDate");
-			Date BeginDate = CalendarUtil.transformStringToDate(benefitDate, CalendarUtil.UP_ITEM_DATEFORMAT_DATE_1);
-			Date endDate = CalendarUtil.transformStringToDate(dueDate, CalendarUtil.UP_ITEM_DATEFORMAT_DATE_1);
+			Date BeginDate = CalendarUtil.transformStringToDate(benefitDate, CalendarUtil.DATEFORMAT_YYYYMMDD);//UP_ITEM_DATEFORMAT_DATE_1
+			Date endDate = CalendarUtil.transformStringToDate(dueDate, CalendarUtil.DATEFORMAT_YYYYMMDD);
 			if(BeginDate.after(endDate)||endDate.equals(BeginDate)){
 				String message = "{'message':'起息日必须晚于到息日!','retCode':'E999999'}";
 				JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(message);
@@ -344,14 +344,14 @@ public class ProductAction extends FuncBaseAction {
 			}else{
 				List<ProductRedemptionInterval> insertedPRIlList = new ArrayList<ProductRedemptionInterval>();
 				String dueDate = productInfo.getDueDate();
-				Date endDate = CalendarUtil.transformStringToDate(dueDate, CalendarUtil.UP_ITEM_DATEFORMAT_DATE_1);
-				Date limitDate = CalendarUtil.transformStringToDate(Constants.LIMITDATE, CalendarUtil.UP_ITEM_DATEFORMAT_DATE_1);
+				Date endDate = CalendarUtil.transformStringToDate(dueDate, CalendarUtil.DATEFORMAT_YYYYMMDD);
+				Date limitDate = CalendarUtil.transformStringToDate(Constants.LIMITDATE, CalendarUtil.DATEFORMAT_YYYYMMDD);
 				if(endDate.after(limitDate)){
 					endDate = limitDate;
 				}
 				
 				String firstOpenDay = productInfo.getFirstOpenDay();
-				Date openDay = CalendarUtil.transformStringToDate(firstOpenDay, CalendarUtil.UP_ITEM_DATEFORMAT_DATE_1);
+				Date openDay = CalendarUtil.transformStringToDate(firstOpenDay, CalendarUtil.DATEFORMAT_YYYYMMDD);
 				
 				String rollBenefit = productInfo.getRollBenefit();
 				int rollIntervalSpan = Integer.parseInt(productInfo.getRollIntervalSpan());
@@ -383,10 +383,10 @@ public class ProductAction extends FuncBaseAction {
 			productDto.setProductCode(productInfo.getProductCode());
 			productDto.setProductName(productInfo.getProductName());
 			String benefitDate = productInfo.getBenefitDate();
-			benefitDate = CalendarUtil.transformStringToFormattedString(benefitDate, CalendarUtil.UP_ITEM_DATEFORMAT_DATE_1, CalendarUtil.DATEFORMAT_YYYYMMDD);
+			benefitDate = CalendarUtil.transformStringToFormattedString(benefitDate, CalendarUtil.DATEFORMAT_YYYYMMDD, CalendarUtil.DATEFORMAT_YYYYMMDD);
 			productDto.setBenefitDate(benefitDate);
 			String dueDate = productInfo.getDueDate();
-			dueDate = CalendarUtil.transformStringToFormattedString(dueDate, CalendarUtil.UP_ITEM_DATEFORMAT_DATE_1, CalendarUtil.DATEFORMAT_YYYYMMDD);
+			dueDate = CalendarUtil.transformStringToFormattedString(dueDate, CalendarUtil.DATEFORMAT_YYYYMMDD, CalendarUtil.DATEFORMAT_YYYYMMDD);
 			productDto.setDueDate(dueDate);
 			productDto.setPlannedBenefit(productInfo.getPlannedBenefit());
 			productDto.setIsRoll(productInfo.getIsRoll());
