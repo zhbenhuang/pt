@@ -88,6 +88,11 @@ var selectApplyStatus =
 	 { id: '2', text: '正常'},
 	 { id: '3', text: '终止'}
 	 ];
+var selectConsignLuggage =
+	 [
+	  { id: '1', text: '是',"selected":true },
+	  { id: '0', text: '否'}
+	 ];
 var selectCarType =
 	[
 	 { id: '1', text: '奔驰E级',"selected":true },
@@ -106,7 +111,7 @@ var selectExamType =
 	 { id: '4', text: '心血管套餐'},
 	 { id: '5', text: '上消化道'}
 	 ];
-var selectHispital =
+var selectHospital =
 	[
 	 { id: '1', text: '广东省中医院',"selected":true },
 	 { id: '2', text: '广东省人民医院'},

@@ -13,7 +13,7 @@ public class PbmsHospitalReg implements java.io.Serializable {
 	private static final long serialVersionUID = 9096759447588718278L;
 	private int seqNo;
 	private String clientName;
-	private Integer idcarNo;
+	private String idcarNo;
 	private Integer gender;
 	private String servDate;
 	private Integer hospital;
@@ -28,7 +28,7 @@ public class PbmsHospitalReg implements java.io.Serializable {
 		this.seqNo = seqNo;
 	}
 
-	public PbmsHospitalReg(int seqNo, String clientName, Integer idcarNo,
+	public PbmsHospitalReg(int seqNo, String clientName, String idcarNo,
 			Integer gender, String servDate, Integer hospital,
 			Integer medicalLabor, String docter, String illnessDes) {
 		this.seqNo = seqNo;
@@ -58,11 +58,11 @@ public class PbmsHospitalReg implements java.io.Serializable {
 		this.clientName = clientName;
 	}
 
-	public Integer getIdcarNo() {
+	public String getIdcarNo() {
 		return this.idcarNo;
 	}
 
-	public void setIdcarNo(Integer idcarNo) {
+	public void setIdcarNo(String idcarNo) {
 		this.idcarNo = idcarNo;
 	}
 

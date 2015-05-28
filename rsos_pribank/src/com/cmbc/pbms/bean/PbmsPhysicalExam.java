@@ -13,7 +13,7 @@ public class PbmsPhysicalExam implements java.io.Serializable {
 	private static final long serialVersionUID = 8582735349473867360L;
 	private int seqNo;
 	private String clientName;
-	private Integer idcarNo;
+	private String idcarNo;
 	private Integer gender;
 	private String servDate;
 	private String examType;
@@ -25,7 +25,7 @@ public class PbmsPhysicalExam implements java.io.Serializable {
 		this.seqNo = seqNo;
 	}
 
-	public PbmsPhysicalExam(int seqNo, String clientName, Integer idcarNo,
+	public PbmsPhysicalExam(int seqNo, String clientName, String idcarNo,
 			Integer gender, String servDate, String examType) {
 		this.seqNo = seqNo;
 		this.clientName = clientName;
@@ -51,11 +51,11 @@ public class PbmsPhysicalExam implements java.io.Serializable {
 		this.clientName = clientName;
 	}
 
-	public Integer getIdcarNo() {
+	public String getIdcarNo() {
 		return this.idcarNo;
 	}
 
-	public void setIdcarNo(Integer idcarNo) {
+	public void setIdcarNo(String idcarNo) {
 		this.idcarNo = idcarNo;
 	}
 

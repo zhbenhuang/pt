@@ -86,7 +86,7 @@
  		<action name="newServApply" class="com.cmbc.pbms.action.ServApplyAction">
  			<result name="success" type="redirect">/serv/newServApply.jsp</result>
  		</action>
- 		<action name="saveServApply" class="com.cmbc.pbms.action.ServApplyAction">
+ 		<action name="apply" class="com.cmbc.pbms.action.ServApplyAction">
  			<result name="success" type="json"></result>
  		</action>
  		<action name="modifyServApply" class="com.cmbc.pbms.action.ServApplyAction">

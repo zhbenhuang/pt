@@ -161,6 +161,8 @@
 		 */
 		$('#cancelAdd').click(function(){
 			$('#newServInfoDialog').dialog('close');
+			$('#t_servInfo').datagrid('reload');
+			$('#t_servInfo').datagrid('unselectAll');
 		});
 					
 						
@@ -447,7 +449,6 @@
 				<td align="right">标的附件一</td>
 				<td align="left" colspan="3">
 					<input id="fileUrl1" name="fileUrl1" type="hidden" value=""  required=true/>
-		
 					<div id="showFile1"></div>
 					<div id="fileQueueFile1" ></div>
 					<input type="file" name="uploadify" id="uploadify" />

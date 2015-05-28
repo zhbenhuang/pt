@@ -80,6 +80,10 @@
        		 	<value>com/cmbc/pbms/bean/PbmsApproveInfo.hbm.xml</value>
        		 	<value>com/cmbc/pbms/bean/PbmsStruValue.hbm.xml</value>
        		 	<value>com/cmbc/pbms/bean/PbmsServApply.hbm.xml</value>
+       		 	<value>com/cmbc/pbms/bean/PbmsBoardingList.hbm.xml</value>
+       		 	<value>com/cmbc/pbms/bean/PbmsPhysicalExam.hbm.xml</value>
+       		 	<value>com/cmbc/pbms/bean/PbmsHospitalReg.hbm.xml</value>
+       		 	<value>com/cmbc/pbms/bean/PbmsStruInfo.hbm.xml</value>
        		</list>
 		</property>
 	</bean>

@@ -41,6 +41,8 @@
 	<bean id="servApplyAction" class="com.cmbc.pbms.action.ServApplyAction">
 		<property name="servApplyService" ref="servApplyService"></property>
 		<property name="approveInfoService" ref="approveInfoService"></property>
+		<property name="servInfoService" ref="servInfoService"></property>
+		<property name="approveParmtService" ref="approveParmtService"></property>
 	</bean>	
 	
 	<!--service-->	
@@ -58,6 +60,10 @@
   	</bean>  	
   	<bean id="servApplyService" class="com.cmbc.pbms.service.impl.ServApplyServiceImpl">
     	<property name="servApplyDao" ref="servApplyDao" />
+    	<property name="physicalExamDao" ref="physicalExamDao" />
+    	<property name="hospitalRegDao" ref="hospitalRegDao" />
+    	<property name="boardingDao" ref="boardingDao" />
+    	<property name="approveInfoDao" ref="approveInfoDao" />
   	</bean>  	
   	
   	<!--DAO -->	
@@ -74,6 +80,15 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
   	<bean id="servApplyDao" class="com.cmbc.pbms.dao.impl.ServApplyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+  	<bean id="physicalExamDao" class="com.cmbc.pbms.dao.impl.PhysicalExamDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+  	<bean id="hospitalRegDao" class="com.cmbc.pbms.dao.impl.HospitalRegDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+  	<bean id="boardingDao" class="com.cmbc.pbms.dao.impl.BoardingDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
  </beans>

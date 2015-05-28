@@ -34,10 +34,6 @@
 	$(function(){
 		var business = <%=business%>;
 		$('#newServApplyDialog').dialog({
-			onClose:function()
-			{
-				$('#posbusiness').html("");
-			} 
 		});
 		
 		
@@ -52,7 +48,7 @@
 			loadMsg: '数据正在加载,请耐心的等待...' ,
 			rownumbers:true ,
 			frozenColumns:[[
-				{field:'ck' ,width:1 ,checkbox: false}
+				{field:'ck' ,width:20 ,checkbox: true}
 			]],
 			onLoadSuccess: function (data){					
 				LG.showMsg("查询结果提示",data.retCode,data.message,false);
@@ -114,11 +110,55 @@
 				serValue:grid[0].serValue
 				
 			});
+			$("#imgSerPic").attr("src","downloadServInfoFile!getFile.action?serId="+grid[0].serId+"&fileType=0&fileName="+grid[0].serPic);
+			$("#showFile1").empty();
+			$("#showFile1").append( "<a href=downloadServInfoFile!getFile.action?serId="+grid[0].serId+"&fileType=1&fileName="+grid[0].fileUrl1+">"+grid[0].fileUrl1+"</a><br/>");
+			$("#showFile2").empty();
+			$("#showFile2").append( "<a href=downloadServInfoFile!getFile.action?serId="+grid[0].serId+"&fileType=2&fileName="+grid[0].fileUrl2+">"+grid[0].fileUrl2+"</a><br/>");
+			
+			var idKey_board = "board";
+			var idKey_board_ydj = "board_ydj";
+			var idKey_board_lbc = "board_lbc";
+			var idKey_tj = "tj";
+			var idKey_gh = "gh";
+			var currIdKey="";
+			if(grid[0].bigType == 1 && grid[0].smlType == 1){
+				currIdKey=idKey_board_ydj;
+				show([idKey_board, idKey_board_ydj]);
+				hide([idKey_board_lbc, idKey_tj, idKey_gh]);
+			}else if(grid[0].bigType == 1 && grid[0].smlType == 2){
+				currIdKey=idKey_board_lbc;
+				show([idKey_board, idKey_board_lbc]);
+				hide([idKey_board_ydj, idKey_tj, idKey_gh]);
+			}else if(grid[0].bigType == 1 && grid[0].smlType == 3){
+				currIdKey=idKey_tj;
+				show([idKey_tj]);
+				hide([idKey_board, idKey_board_ydj, idKey_board_lbc, idKey_gh]);
+			}else if(grid[0].bigType == 1 && grid[0].smlType == 4){
+				currIdKey=idKey_gh;
+				show([idKey_gh]);
+				hide([idKey_board, idKey_board_ydj, idKey_board_lbc, idKey_tj]);
+			}else{
+				hide([idKey_board, idKey_board_ydj, idKey_board_lbc, idKey_tj, idKey_gh]);
+			}
+		}
+		
+	}
+	function show(arrayobj){
+		if(!arrayobj || arrayobj.length <=0) return ;
+		for (var i=0; i<arrayobj.length; i++){
+			$("#newServApplyTable tr[id='"+arrayobj[i]+"']").show();
+		}
+	}
+	function hide(arrayobj){
+		if(!arrayobj || arrayobj.length <=0) return ;
+		for (var i=0; i<arrayobj.length; i++){
+			$("#newServApplyTable tr[id='"+arrayobj[i]+"']").hide();
 		}
 	}
 
 	function doConfirmAdd1(){
-		actionMethod = "saveServApply";
+		actionMethod = "apply";
 		if($('#newServApplyForm').form('validate')){				
 			$.ajax({
 				type: 'post' ,
@@ -145,6 +185,7 @@
 	
 	function doCancelAdd1(){
 		$('#newServApplyDialog').dialog('close');
+		$('#t_servInfo').datagrid('reload');
 		$('#t_servInfo').datagrid('unselectAll');
 	}
 	
@@ -171,15 +212,15 @@
 			<table id="t_servInfo" style="width: 100%;height:100%"></table>
 		</div>
 	</div>
-
-	<div id="newServApplyDialog" title="申请兑换" class="easyui-dialog" style="width:600px;height:450px;background-color:#E4F5EF;"  
+	<div id="newServApplyDialog" title="申请兑换--非增值活动" class="easyui-dialog" style="width:600px;height:500px;background-color:#E4F5EF;"  
         data-options="iconCls:'icon-dialog',modal:true,draggable:true,closed:true">
 		<form id="newServApplyForm" action="" method="post"  align="center">
 		<br/>
-		<table align="center" width="90%" border="1" style="background-color:#E4F5EF;">
+		<table id="newServApplyTable" align="center" width="90%" border="1" style="background-color:#E4F5EF;">
 			<tr>
 				<td width="15%" align="center">标的图片&nbsp;</td>
-				<td width="25%">&nbsp;<input id="serId" name="serId" type="file" value=""/><br /><a href="#" >"xxxx.jpg"</a></td>
+				<td width="25%">&nbsp;<img id="imgSerPic" src="downloadServInfoFile!getSerPic.action?serId=&fileType=0" height="20" width="30" />
+				</td>
 				<td width="15%" align="center">标的编号&nbsp;</td>
 				<td width="25%">&nbsp;<input id="serId" name="serId" type="text" readonly="readonly" required=true style="height:22px;border:1px solid #A4BED4;" value=""  /></td>
 			</tr>
@@ -191,10 +232,12 @@
 			</tr>
 			<tr>
 				<td align="center">标的大类&nbsp;</td>
-				<td>&nbsp;<input id="bigType" name="bigType" type="text" readonly="readonly" required=true style="height:22px;border:1px solid #A4BED4;" value=""  /></td>
+				<td>&nbsp;<input id="bigType" name="bigType" type="text" class="easyui-combobox" readonly="readonly" required=true style="height:22px;border:1px solid #A4BED4;" value=""  data-options="valueField:'id',textField:'text',data:selectBigType"/></td>
 				<td align="center">标的小类&nbsp;</td>
-				<td>&nbsp;<input id="smlType" name="smlType" type="text" readonly="readonly" required=true style="height:22px;border:1px solid #A4BED4;" value=""  /></td>
+				<td>&nbsp;<input id="smlType" name="smlType" type="text" class="easyui-combobox" readonly="readonly" required=true style="height:22px;border:1px solid #A4BED4;" value=""  data-options="valueField:'id',textField:'text',data:selectSmlType"/></td>
 			</tr>
+			
+			
 			<tr>
 				<td align="center">客户信息号&nbsp;<font color="red">*</font></td>
 				<td>&nbsp;<input id="clientId" type="text" name="clientId" value="" class="easyui-validatebox" required=true style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
@@ -207,17 +250,114 @@
 				<td align="center">标的数量&nbsp;<font color="red">*</font></td>
 				<td>&nbsp;<input id="applyQuatt" type="text" name="applyQuatt" value="" class="easyui-validatebox" required=true style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
 			</tr>
+			
+			<!-- 易登机/礼宾车 BOARDING-->
+			<tr id="board">
+				<td align="center">使用者姓名&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="clientName" type="text" name="clientName" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">服务日期&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="servDate" type="text" name="servDate" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+			</tr>
+			<tr id="board">
+				<td align="center">航班号&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="fltNo" type="text" name="fltNo" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">航班起飞时间&nbsp;<font color="red">*</font>(HH:MM)</td>
+				<td>&nbsp;<input id="takeoffTime" type="text" name="takeoffTime" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+			</tr>
+			<tr id="board">
+				<td align="center">航班到达时间&nbsp;<font color="red">*</font>(HH:MM)</td>
+				<td>&nbsp;<input id="arrivalTime" type="text" name="arrivalTime" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">始发城市&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="provenace" type="text" name="provenace" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+			</tr>
+			<tr id="board">
+				<td align="center">人数&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="peopleNum" type="text" name="peopleNum" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">目的城市&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="destination" type="text" name="destination" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+			</tr>
+			<!-- +易登机-->
+			<tr id="board_ydj">
+				<td align="center">车牌号&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="licenseNumber" type="text" name="licenseNumber" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">是否托运行李&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="consignLuggage" type="text" name="consignLuggage" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;" data-options="valueField:'id',textField:'text',data:selectConsignLuggage"/></td>
+			</tr>
+			
+			<!-- +礼宾车 -->
+			<tr id="board_lbc">
+				<td align="center">接送时间&nbsp;<font color="red">*</font>(HH:MM)</td>
+				<td>&nbsp;<input id="pickTime" type="text" name="pickTime" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">接送地址&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="pickAddr" type="text" name="pickAddr" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;" /></td>
+			</tr>
+			<tr id="board_lbc">
+				<td align="center">车型&nbsp;<font color="red">*</font></td>
+				<td colspan="3">&nbsp;<input id="carType" type="text" name="carType" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;" data-options="valueField:'id',textField:'text',data:selectCarType"/></td>
+			</tr>
+			
+			<!-- 体检 PHYSICAL_EXAM-->
+			<tr id="tj">
+				<td align="center">体检人姓名&nbsp;<font color="red">*</font></td>
+				<td colspan="3">&nbsp;<input id="clientName_tj" type="text" name="clientName_tj" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+			</tr>
+			<tr id="tj">
+				<td align="center">身份证号&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="idcarNo_tj" type="text" name="idcarNo_tj" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">性别&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="gender_tj" type="text" name="gender_tj" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;" data-options="valueField:'id',textField:'text',data:selectGender"/></td>
+			</tr>
+			<tr id="tj">
+				<td align="center">体检日期&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="servDate_tj" type="text" name="servDate_tj" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">体检套餐&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="examType" type="text" name="examType" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;" data-options="valueField:'id',textField:'text',data:selectExamType"/></td>
+			</tr>
+			
+			<!-- 挂号 HOSPITAL_REG-->
+			<tr id="gh">
+				<td align="center">挂号姓名&nbsp;<font color="red">*</font></td>
+				<td colspan="3">&nbsp;<input id="clientName_gh" type="text" name="clientName_gh" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+			</tr>
+			<tr id="gh">
+				<td align="center">身份证号&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="idcarNo_gh" type="text" name="idcarNo_gh" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">性别&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="gender_gh" type="text" name="gender_gh" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;" data-options="valueField:'id',textField:'text',data:selectGender"/></td>
+			</tr>
+			<tr id="gh">
+				<td align="center">就诊日期&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="servDate_gh" type="text" name="servDate_gh" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">预约医院&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="hospital" type="text" name="hospital" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;" data-options="valueField:'id',textField:'text',data:selectHospital"/></td>
+			</tr>
+			<tr id="gh">
+				<td align="center">预约医科&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="medicalLabor" type="text" name="medicalLabor" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td align="center">预约专科&nbsp;<font color="red">*</font></td>
+				<td>&nbsp;<input id="docter" type="text" name="docter" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;" data-options="valueField:'id',textField:'text',data:selectMedicalLabor"/></td>
+			</tr>
+			<tr id="gh">
+				<td align="center">病情描述&nbsp;</td>
+				<td align="left" colspan="3">&nbsp;<input id="illnessDes" name="illnessDes" value="" style="background-color: #E1E6E9;width:80%;height:44px;border:1px solid #A4BED4;"/></td>
+			</tr>
+			
+			
 			<tr>
 				<td align="center">备注&nbsp;</td>
 				<td align="left" colspan="3">&nbsp;<input id="remark" name="remark" value="" style="background-color: #E1E6E9;width:80%;height:44px;border:1px solid #A4BED4;"/></td>
 			</tr>
+			
+			
+			
+			
 			<tr>
 				<td align="center" >标的附件一&nbsp;</td>
-				<td colspan="3">&nbsp;<input id="fileUrl1" type="file" name="fileUrl1" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td colspan="3">&nbsp;<div id="showFile1"></div></td>
 			</tr>
 			<tr>
 				<td align="center">标的附件二&nbsp;</td>
-				<td colspan="3">&nbsp;<input id="fileUrl2" type="file" name="fileUrl2" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
+				<td colspan="3">&nbsp;<div id="showFile2"></div></td>
 			</tr>
 			<tr>
 				<td align="center">申请人&nbsp;</td>

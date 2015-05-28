@@ -11,7 +11,7 @@
         <property name="clientName" type="string">
             <column name="CLIENT_NAME" length="50" />
         </property>
-        <property name="idcarNo" type="java.lang.Integer">
+        <property name="idcarNo" type="string">
             <column name="IDCAR_NO" />
         </property>
         <property name="gender" type="java.lang.Integer">

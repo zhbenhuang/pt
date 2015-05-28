@@ -235,6 +235,11 @@ public class ServInfoAction extends BaseAction {
 			String alterTime = alterTime_DateTimeString;//getHttpRequest().getParameter("alterTime");
 			
 			PbmsServInfo servInfo = servInfoService.findServInfo(serId);
+			if(servInfo == null){
+				log.error("when modify, can not find serId="+serId);
+				writeErrors(Constants.RETCODE_999999);
+				return ;
+			}
 			servInfo.setSerId(Integer.parseInt(serId));
 			servInfo.setSerName(serName);
 			servInfo.setSerDes(serDes);

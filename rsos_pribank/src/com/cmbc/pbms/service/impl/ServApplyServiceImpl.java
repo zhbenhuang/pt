@@ -6,7 +6,15 @@ import rsos.framework.constant.GlobalConstants;
 import rsos.framework.easyui.EasyGridList;
 import rsos.framework.exception.AppException;
 
+import com.cmbc.pbms.bean.PbmsApproveInfo;
+import com.cmbc.pbms.bean.PbmsBoardingList;
+import com.cmbc.pbms.bean.PbmsHospitalReg;
+import com.cmbc.pbms.bean.PbmsPhysicalExam;
 import com.cmbc.pbms.bean.PbmsServApply;
+import com.cmbc.pbms.dao.ApproveInfoDao;
+import com.cmbc.pbms.dao.BoardingDao;
+import com.cmbc.pbms.dao.HospitalRegDao;
+import com.cmbc.pbms.dao.PhysicalExamDao;
 import com.cmbc.pbms.dao.ServApplyDao;
 import com.cmbc.pbms.dto.QueryServApplyDto;
 import com.cmbc.pbms.service.ServApplyService;
@@ -14,11 +22,26 @@ import com.cmbc.pbms.service.ServApplyService;
 public class ServApplyServiceImpl implements ServApplyService {
 	private Logger log = Logger.getLogger(GlobalConstants.USER_ACCESS_LOGGER);
 	private ServApplyDao servApplyDao;
+	private PhysicalExamDao physicalExamDao;
+	private HospitalRegDao hospitalRegDao;
+	private BoardingDao boardingDao;
+	private ApproveInfoDao approveInfoDao;
 	
 	public void setServApplyDao(ServApplyDao servApplyDao) {
 		this.servApplyDao = servApplyDao;
 	}
-	
+	public void setPhysicalExamDao(PhysicalExamDao physicalExamDao) {
+		this.physicalExamDao = physicalExamDao;
+	}
+	public void setHospitalRegDao(HospitalRegDao hospitalRegDao) {
+		this.hospitalRegDao = hospitalRegDao;
+	}
+	public void setBoardingDao(BoardingDao boardingDao) {
+		this.boardingDao = boardingDao;
+	}
+	public void setApproveInfoDao(ApproveInfoDao approveInfoDao) {
+		this.approveInfoDao = approveInfoDao;
+	}
 	public EasyGridList<PbmsServApply> findServApplys(QueryServApplyDto queryDto)
 			throws AppException {
 		try {
@@ -61,6 +84,44 @@ public class ServApplyServiceImpl implements ServApplyService {
 		}
 	}
 	
+	@Override
+	public void apply(PbmsServApply servApply,
+			PbmsHospitalReg hospitalReg, PbmsApproveInfo approveInfo) throws AppException {
+		try {
+			servApplyDao.insert(servApply);
+			hospitalRegDao.insert(hospitalReg);
+			approveInfoDao.insert(approveInfo);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new AppException("E000007");
+		}
+	}
+
+	@Override
+	public void apply(PbmsServApply servApply,
+			PbmsPhysicalExam physicalExam, PbmsApproveInfo approveInfo) throws AppException{
+		try {
+			servApplyDao.insert(servApply);
+			physicalExamDao.insert(physicalExam);
+			approveInfoDao.insert(approveInfo);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new AppException("E000007");
+		}
+	}
+
+	@Override
+	public void apply(PbmsServApply servApply, PbmsBoardingList boarding, PbmsApproveInfo approveInfo) throws AppException{
+		try {
+			servApplyDao.insert(servApply);
+			boardingDao.insert(boarding);
+			approveInfoDao.insert(approveInfo);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new AppException("E000007");
+		}
+	}
+
 	public void modifyServApply(PbmsServApply servApply)
 			throws AppException {
 		try {
