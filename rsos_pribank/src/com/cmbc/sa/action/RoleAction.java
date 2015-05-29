@@ -5,6 +5,13 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 
+
+
+
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -23,6 +30,7 @@ import com.cmbc.sa.bean.Permission;
 import com.cmbc.sa.bean.Role;
 import com.cmbc.sa.bean.RolePermission;
 import com.cmbc.sa.bean.Users;
+import com.cmbc.sa.dao.RoleDao;
 import com.cmbc.sa.dto.QueryRoleDto;
 import com.cmbc.sa.service.RoleService;
 import com.opensymphony.xwork2.Action;
@@ -60,6 +68,34 @@ public class RoleAction extends BaseAction {
 		this.ret = ret;
 	}	
 
+	public void loadRoles(){
+		
+		try{
+			printParameters();
+			log.info("-------loadRoles--------");
+			List<Role> roles = roleService.loadRoles();
+			
+			JSONArray jsonArray = new JSONArray();
+			if(roles == null){
+				;
+			}else{
+				JSONObject jsonObj = new JSONObject();
+				for (Role role : roles) {
+					jsonObj.put("id", role.getRoleId());
+					jsonObj.put("text", role.getRoleName());
+					jsonArray.add(jsonObj);
+				}
+			}
+			String res = jsonArray.toString();
+			log.info(getText(Constants.RETCODE_00000)+"---"+res);
+			writeJsonSuccess(res);			
+			
+		} catch (Exception e) {
+			writeErrors(Constants.RETCODE_999999);
+			e.printStackTrace();
+		}
+	}
+	
 	public void queryRoleList()
 	{
 		try{

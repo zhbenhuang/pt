@@ -1,6 +1,9 @@
 package com.cmbc.pbms.action;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
@@ -18,7 +21,9 @@ import rsos.framework.utils.CalendarUtil;
 import com.cmbc.pbms.bean.PbmsApproveParmt;
 import com.cmbc.pbms.dto.QueryApproveParmtDto;
 import com.cmbc.pbms.service.ApproveParmtService;
+import com.cmbc.sa.bean.Role;
 import com.cmbc.sa.bean.Users;
+import com.cmbc.sa.service.RoleService;
 @Scope("prototype")
 @Controller("approveParmtAction")
 public class ApproveParmtAction extends BaseAction {
@@ -26,8 +31,13 @@ public class ApproveParmtAction extends BaseAction {
 	private static final long serialVersionUID = 1L;	
 	
 	private ApproveParmtService approveParmtService;
+	private RoleService roleService;
 	private EasyResult ret;
 	
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
+	}
+
 	public void setApproveParmtService(ApproveParmtService approveParmtService) {
 		this.approveParmtService = approveParmtService;
 	}
@@ -50,7 +60,23 @@ public class ApproveParmtAction extends BaseAction {
 			queryDto.setPageDto(initPageParameters());
 			queryDto.setApprType(apprType);
 			
+			List<Role> roles = roleService.loadRoles();
+			Map<String, String> map = new HashMap<String, String>();
+			for (Role role : roles) {
+				map.put(role.getRoleId(), role.getRoleName());
+			}
+			map.put("", "");
+			map.put(null, "");
 			EasyGridList<PbmsApproveParmt> ulist = approveParmtService.findApproveParmts(queryDto);
+			if(ulist != null && ulist.getRows()!=null){
+				for (PbmsApproveParmt temp : ulist.getRows()) {
+					temp.setStepRole1(map.get(temp.getStepRole1()));
+					temp.setStepRole2(map.get(temp.getStepRole2()));
+					temp.setStepRole3(map.get(temp.getStepRole3()));
+					temp.setStepRole4(map.get(temp.getStepRole4()));
+					temp.setStepRole5(map.get(temp.getStepRole5()));
+				}
+			}
 			ulist.setRetCode(Constants.RETCODE_00000);
 			ulist.setMessage(getText(Constants.RETCODE_00000));
 			log.info(getText(Constants.RETCODE_00000)+"---"+ulist.toJson());
@@ -147,6 +173,17 @@ public class ApproveParmtAction extends BaseAction {
 			String stepRole3 = getHttpRequest().getParameter("stepRole3");
 			String stepRole4 = getHttpRequest().getParameter("stepRole4");
 			String stepRole5 = getHttpRequest().getParameter("stepRole5");
+			List<Role> roles = roleService.loadRoles();
+			Map<String, String> map = new HashMap<String, String>();
+			for (Role role : roles) {
+				map.put(role.getRoleName(), role.getRoleId());
+			}
+			if(!needChange(stepRole1)) stepRole1 = map.get(stepRole1);
+			if(!needChange(stepRole2)) stepRole2 = map.get(stepRole2);
+			if(!needChange(stepRole3)) stepRole3 = map.get(stepRole3);
+			if(!needChange(stepRole4)) stepRole4 = map.get(stepRole4);
+			if(!needChange(stepRole5)) stepRole5 = map.get(stepRole5);
+			
 			Users user = (Users)getSession().getAttribute(GlobalConstants.USER_INFORMATION_KEY);
 			String userId = user.getUserId();//getHttpRequest().getParameter("userId");
 			String alterTime_DateTimeString = CalendarUtil.formatDatetime(new Date(), CalendarUtil.DATEFORMAT_YYYYMMDD_HHmmss);
@@ -178,6 +215,14 @@ public class ApproveParmtAction extends BaseAction {
 		}
 	}
 	
+	private boolean needChange(String str) {
+		if(str == null){
+			return false;
+		}
+		boolean isNum = str.matches("[0-9]+"); 
+		return isNum;
+	}
+
 	/**
 	 * ids为组合键（apprType,business).
 	 */

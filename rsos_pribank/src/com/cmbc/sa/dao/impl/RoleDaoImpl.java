@@ -61,6 +61,23 @@ public class RoleDaoImpl extends EasyBaseDaoImpl<Role> implements RoleDao {
 		return result;
 	}
 	
+	@SuppressWarnings({ "unchecked"})
+	public List<Role> selectRoles() {
+		List<Role> result = getHibernateTemplate().execute(new HibernateCallback() {			
+			public Object doInHibernate(Session session) throws HibernateException, SQLException {
+				
+				StringBuilder sql = new StringBuilder();
+				sql.append("select distinct {b.*} from role b ")
+				.append(" where 1=1 ");
+				
+				Query queryResult = session.createSQLQuery( sql.toString() )
+						.addEntity("b", Role.class);
+				return queryResult.list();
+			}
+		});
+		return result;
+	}
+	
 	
 	@SuppressWarnings({ "unchecked"})
 	public EasyGridList<Role> selectRoles(final QueryRoleDto queryDto) {

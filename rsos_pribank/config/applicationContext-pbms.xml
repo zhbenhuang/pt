@@ -30,6 +30,7 @@
 	</bean>	
 	<bean id="approveParmtAction" class="com.cmbc.pbms.action.ApproveParmtAction">
 		<property name="approveParmtService" ref="approveParmtService"></property>
+		<property name="roleService" ref="roleService"></property>
 	</bean>	
 	<bean id="approveInfoAction" class="com.cmbc.pbms.action.ApproveInfoAction">
 		<property name="approveInfoService" ref="approveInfoService"></property>
@@ -43,6 +44,9 @@
 		<property name="approveInfoService" ref="approveInfoService"></property>
 		<property name="servInfoService" ref="servInfoService"></property>
 		<property name="approveParmtService" ref="approveParmtService"></property>
+	</bean>	
+	<bean id="uploadStruValueImportTempFileAction" class="com.cmbc.pbms.action.UploadStruValueImportTempFileAction">
+		<property name="struValueService" ref="struValueService"></property>
 	</bean>	
 	
 	<!--service-->	

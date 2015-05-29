@@ -281,6 +281,8 @@ public class ServApplyAction extends BaseAction {
 					hospitalReg.setDocter(docter);
 					hospitalReg.setIllnessDes(illnessDes);
 					servApplyService.apply(servApply, hospitalReg, approveInfo);	
+				}else{
+					servApplyService.apply(servApply, approveInfo);
 				}
 				
 				

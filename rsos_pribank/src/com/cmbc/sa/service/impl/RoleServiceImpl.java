@@ -39,6 +39,9 @@ public class RoleServiceImpl implements RoleService {
 		this.rolePermissionDao = rolePermissionDao;
 	}
 	
+	public List<Role> loadRoles() {
+		return roleDao.selectRoles();
+	}
 	public EasyGridList<Role> findRoles(QueryRoleDto queryDto)
 			throws AppException {
 		try {

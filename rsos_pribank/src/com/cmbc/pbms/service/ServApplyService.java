@@ -21,4 +21,5 @@ public interface ServApplyService {
 	public void apply(PbmsServApply servApply, PbmsHospitalReg hospitalReg, PbmsApproveInfo approveInfo)throws AppException;
 	public void apply(PbmsServApply servApply, PbmsPhysicalExam physicalExam, PbmsApproveInfo approveInfo)throws AppException;
 	public void apply(PbmsServApply servApply, PbmsBoardingList boarding, PbmsApproveInfo approveInfo)throws AppException;
+	public void apply(PbmsServApply servApply, PbmsApproveInfo approveInfo)throws AppException;
 }

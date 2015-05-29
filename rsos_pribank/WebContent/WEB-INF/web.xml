@@ -11,6 +11,9 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<listener>
+	    <listener-class>com.cmbc.web.SystemInitListener</listener-class>
+	</listener>
 	<filter>
        <filter-name>SessionFilter</filter-name>
        <filter-class>rsos.framework.struts2.SessionFilter</filter-class>

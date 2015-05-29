@@ -4,6 +4,7 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	Integer business = (Integer)session.getAttribute("BUSINESS");
 	System.out.println("business="+business);
+	
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -182,6 +183,32 @@
 				$('#sr5').show();
 			}
 		});
+		
+		$('#stepRole1').combobox({ 
+			url:'loadRoles!loadRoles.action', 
+			valueField:'id', 
+			textField:'text' 
+		}); 
+		$('#stepRole2').combobox({ 
+			url:'loadRoles!loadRoles.action', 
+			valueField:'id', 
+			textField:'text' 
+		}); 
+		$('#stepRole3').combobox({ 
+			url:'loadRoles!loadRoles.action', 
+			valueField:'id', 
+			textField:'text' 
+		}); 
+		$('#stepRole4').combobox({ 
+			url:'loadRoles!loadRoles.action', 
+			valueField:'id', 
+			textField:'text' 
+		}); 
+		$('#stepRole5').combobox({ 
+			url:'loadRoles!loadRoles.action', 
+			valueField:'id', 
+			textField:'text' 
+		}); 
 
 	});
 	
@@ -304,7 +331,7 @@
 	
 	
   	
-  	<div id="newApproveParmtDialog" title="新增审批流程" class="easyui-dialog" style="width:300px;height:500px;background-color:#E4F5EF;"  
+  	<div id="newApproveParmtDialog" title="新增审批流程" class="easyui-dialog" style="width:400px;height:500px;background-color:#E4F5EF;"  
         data-options="iconCls:'icon-save',modal:true,draggable:true,closed:true">
 		<form id="newApproveParmtForm" action="" method="post"  align="center">
 		<input id="apprTypeNew" name="apprType" type="hidden" value="" />
@@ -340,23 +367,23 @@
 			</tr>
 			<tr id="sr1">
 				<td align="right">步骤一审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole1" id="stepRole1" type="text" class="easyui-validatebox" required=true missingMessage="角色1不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole1" id="stepRole1" type="text" value="" /></td>
 			</tr>
 			<tr id="sr2">
 				<td align="right">步骤二审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole2" id="stepRole2" type="text" class="easyui-validatebox" required=true missingMessage="角色2不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole2" id="stepRole2" type="text" value="" /></td>
 			</tr>
 			<tr id="sr3">
 				<td align="right">步骤三审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole3" id="stepRole3" type="text" class="easyui-validatebox" required=true missingMessage="角色3不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole3" id="stepRole3" type="text" value="" /></td>
 			</tr>
 			<tr id="sr4">
 				<td align="right">步骤四审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole4" id="stepRole4" type="text" class="easyui-validatebox" required=true missingMessage="角色4不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole4" id="stepRole4" type="text" value="" /></td>
 			</tr>
 			<tr id="sr5">
 				<td align="right">步骤五审批角色:&nbsp;<font color="red">*</font></td>
-				<td align="left"><input name="stepRole5" id="stepRole5" type="text" class="easyui-validatebox" required=true missingMessage="角色5不可为空!" style="height:22px;border:1px solid #A4BED4;" value="" /></td>
+				<td align="left"><input name="stepRole5" id="stepRole5" type="text" value="" /></td>
 			</tr>
 			
 			
