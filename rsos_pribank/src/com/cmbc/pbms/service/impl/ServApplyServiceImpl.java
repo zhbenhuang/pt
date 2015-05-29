@@ -85,6 +85,17 @@ public class ServApplyServiceImpl implements ServApplyService {
 	}
 	
 	@Override
+	public void apply(PbmsServApply servApply, PbmsApproveInfo approveInfo) throws AppException {
+		try {
+			servApplyDao.insert(servApply);
+			approveInfoDao.insert(approveInfo);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new AppException("E000007");
+		}
+	}
+	
+	@Override
 	public void apply(PbmsServApply servApply,
 			PbmsHospitalReg hospitalReg, PbmsApproveInfo approveInfo) throws AppException {
 		try {
