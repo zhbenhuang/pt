@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 
 import com.cmbc.pbms.bean.PbmsStruInfo;
 import com.cmbc.pbms.bean.PbmsStruValue;
+import com.cmbc.pbms.bean.PbmsStruValueId;
 import com.cmbc.pbms.dao.StruValueDao;
 import com.cmbc.pbms.dto.QueryStruValueDto;
 
@@ -120,6 +121,31 @@ public class StruValueDaoImpl extends EasyBaseDaoImpl<PbmsStruValue> implements 
 		}else{
 			return Integer.parseInt(obj.toString());
 		}
+	}
+
+	@Override
+	public void batchDeleteStruValues(List<PbmsStruValueId> ids) {
+		final StringBuilder sqlBuilder = new StringBuilder();
+		String idstr = "";
+		for (PbmsStruValueId pbmsStruValueId : ids) {
+			
+		}
+		sqlBuilder.append(" delete from PBMS_STRU_VALUE where STRU_ID in ( ")
+			.append(idstr ).append(" ) ");
+		
+		this.getHibernateTemplate().execute(new HibernateCallback(){
+
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public void batchInsertStruValues(List<PbmsStruValue> list) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

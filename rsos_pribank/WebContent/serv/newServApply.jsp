@@ -148,32 +148,12 @@
   		</div>
   		<div region="center" style="overflow:auto;background-color:#E4F5EF;width:100%;height:100%">
    			<br/>
-	   		<form id="myformApply" action="" method="post">
-	   			<div class="title" align="center" ><table><tr><td><h4>积分兑换申请</h4></td></tr></table></div>
+	   		<form id="myformImport" action="" method="post">
+	   			<div class="title" align="center" ><table><tr><td><h4>上传文件</h4></td></tr></table></div>
 	   			<table width="90%" border="1" align="center" style="background-color:#E4F5EF">
-  					<tr>
-   						<td width="15%" align="center">标的图片&nbsp;</td>
-   						<td width="25%">&nbsp;<%=srcPic %></td>
-   						<td width="15%" align="center">标的编号&nbsp;</td>
-   						<td width="25%">&nbsp;<%=serId %></td>
-   					</tr>
-  					<tr>
-   						<td align="center">标的名称&nbsp;<%=serName %></td>
-   						<td>&nbsp;</td>
-   						<td align="center">标的价格&nbsp;<%=serValue %></td>
-   						<td>&nbsp;</td>
-   					</tr>
-  					<tr>
-   						<td align="center">标的大类&nbsp;<%=bigType %></td>
-   						<td>&nbsp;</td>
-   						<td align="center">标的小类&nbsp;<%=smlType %></td>
-   						<td>&nbsp;</td>
-   					</tr>
    					<tr>
-   						<td align="center">客户信息号&nbsp;<font color="red">*</font></td>
+   						<td align="center">积分期数&nbsp;<font color="red">*</font></td>
    						<td>&nbsp;<input id="clientId" type="text" name="clientId" value="" class="easyui-validatebox" required=true style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
-   						<td align="center">客户姓名&nbsp;<font color="red">*</font></td>
-   						<td>&nbsp;<input id="pbclientName" type="text" name="pbclientName" value="" class="easyui-validatebox" required=true style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
    					</tr>
    					<tr>
    						<td align="center">联系电话&nbsp;<font color="red">*</font></td>
@@ -188,15 +168,7 @@
    					<tr>
    						<td align="center">标的附件一&nbsp;</td>
    						<td>&nbsp;<input id="fileUrl1" type="file" name="fileUrl1" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
-   						<td align="center">标的附件二&nbsp;</td>
-   						<td>&nbsp;<input id="fileUrl2" type="file" name="fileUrl2" value="" style="background-color: #E1E6E9;width:80%;height:22px;border:1px solid #A4BED4;"/></td>
    					</tr>
-   					<tr>
-   						<td align="center">申请人&nbsp;</td>
-   						<td>&nbsp;<%=userId %></td>
-   						<td align="center">申请机构&nbsp;</td>
-   						<td>&nbsp;<%=userDepartmentName %></td>
-   					</tr> 					 					    					    					    					    					    					    					    					
 	   			</table>
   				<table width="90%" align="center" style="background-color:#E4F5EF">
   					<tr>

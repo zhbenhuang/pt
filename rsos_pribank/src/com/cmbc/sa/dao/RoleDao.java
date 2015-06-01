@@ -13,6 +13,7 @@ import com.cmbc.sa.dto.QueryRoleDto;
 public interface RoleDao extends EasyBaseDao<Role> {
 	public List<Role> selectRoles(String userId,Integer business);
 	public List<Role> selectRoles(Integer business);
+	public List<Role> selectRoles();
 	public EasyGridList<Role> selectRoles(QueryRoleDto queryDto);
 	public EasyGridList<Users> selectUsersByRole(QueryRoleDto queryDto);
 	public Role selectRole(String roleId,Integer business);

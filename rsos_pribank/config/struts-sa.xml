@@ -85,6 +85,9 @@
  		<action name="savePermissions" class="com.cmbc.sa.action.RoleAction">
 			<result name="success" type="json"></result>
 		</action>
+ 		<action name="loadRoles" class="com.cmbc.sa.action.RoleAction">
+			<result name="success" type="json"></result>
+		</action>
 	</package>
  	
  	<package name="department" namespace="" extends="json-default">

@@ -23,4 +23,5 @@ public interface RoleService {
 	public List<Permission> findAllPermissions() throws AppException;
 	public void saveRolePermissions(List<RolePermission> rolePermissions,String roleId,Integer business) throws AppException;
 	public List<Permission> findPermissionsByBusiness(int business)throws AppException;
+	public List<Role> loadRoles();
 }

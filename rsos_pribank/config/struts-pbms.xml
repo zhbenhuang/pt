@@ -7,7 +7,12 @@
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 
-	<package name="uploadServInfo" extends="json-default">  
+	<package name="uploadStruValueImport" extends="json-default">  
+        <action name="uploadStruValueImportTempFile" class="com.cmbc.pbms.action.UploadStruValueImportTempFileAction">  
+            <result name="success" type="json"></result>
+        </action>  
+    </package>  
+    <package name="uploadServInfo" extends="json-default">  
         <action name="uploadServInfoFile" class="com.cmbc.pbms.action.UploadServInfoFileAction">  
             <result name="success" type="json"></result>
         </action>  
@@ -96,4 +101,5 @@
  			<result name="success" type="json"></result>
  		</action>
 	</package>
+	
 </struts>

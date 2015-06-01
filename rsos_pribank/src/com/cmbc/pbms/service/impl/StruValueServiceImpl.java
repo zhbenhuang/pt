@@ -1,8 +1,8 @@
 package com.cmbc.pbms.service.impl;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -10,12 +10,11 @@ import rsos.framework.constant.GlobalConstants;
 import rsos.framework.easyui.EasyGridList;
 import rsos.framework.exception.AppException;
 
-import com.cmbc.pbms.bean.PbmsStruInfo;
 import com.cmbc.pbms.bean.PbmsStruValue;
+import com.cmbc.pbms.bean.PbmsStruValueId;
 import com.cmbc.pbms.dao.StruValueDao;
 import com.cmbc.pbms.dto.QueryStruValueDto;
 import com.cmbc.pbms.service.StruValueService;
-import com.cmbc.sa.dao.DepartmentDao;
 
 public class StruValueServiceImpl implements StruValueService {
 	private Logger log = Logger.getLogger(GlobalConstants.USER_ACCESS_LOGGER);
@@ -85,6 +84,14 @@ public class StruValueServiceImpl implements StruValueService {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return 0;
+		}
+	}
+
+	@Override
+	public void importManyStruValue(Set<PbmsStruValue> struValues)
+			throws AppException {
+		for (PbmsStruValue psv : struValues) {
+			struValueDao.insert(psv);
 		}
 	}
 

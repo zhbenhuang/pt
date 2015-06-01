@@ -38,31 +38,37 @@ public class PbmsStruValueId implements java.io.Serializable {
 		this.term = term;
 	}
 
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof PbmsStruValueId))
-			return false;
-		PbmsStruValueId castOther = (PbmsStruValueId) other;
-
-		return ((this.getStruId() == castOther.getStruId()) || (this
-				.getStruId() != null && castOther.getStruId() != null && this
-				.getStruId().equals(castOther.getStruId())))
-				&& ((this.getTerm() == castOther.getTerm()) || (this.getTerm() != null
-						&& castOther.getTerm() != null && this.getTerm()
-						.equals(castOther.getTerm())));
-	}
-
+	@Override
 	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result
-				+ (getStruId() == null ? 0 : this.getStruId().hashCode());
-		result = 37 * result
-				+ (getTerm() == null ? 0 : this.getTerm().hashCode());
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((struId == null) ? 0 : struId.hashCode());
+		result = prime * result + ((term == null) ? 0 : term.hashCode());
 		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PbmsStruValueId other = (PbmsStruValueId) obj;
+		if (struId == null) {
+			if (other.struId != null)
+				return false;
+		} else if (!struId.equals(other.struId))
+			return false;
+		if (term == null) {
+			if (other.term != null)
+				return false;
+		} else if (!term.equals(other.term))
+			return false;
+		return true;
+	}
+
+
 
 }

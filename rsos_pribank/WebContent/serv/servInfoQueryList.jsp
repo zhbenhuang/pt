@@ -48,7 +48,7 @@
 			loadMsg: '数据正在加载,请耐心的等待...' ,
 			rownumbers:true ,
 			frozenColumns:[[
-				{field:'ck' ,width:20 ,checkbox: true}
+				{field:'ck' ,width:1 ,checkbox: false}
 			]],
 			onLoadSuccess: function (data){					
 				LG.showMsg("查询结果提示",data.retCode,data.message,false);
@@ -86,8 +86,11 @@
 	});
 	
 	function apply(rowNum){
+		$('#t_servInfo').datagrid('unselectAll');	
 		if(rowNum){
 			$('#t_servInfo').datagrid('selectRow',rowNum);
+		}else{
+			$('#t_servInfo').datagrid('selectRow',0);
 		}
 		actionMethod = 'newServApply';
 		var grid =$('#t_servInfo').datagrid('getSelections');
@@ -141,6 +144,7 @@
 			}else{
 				hide([idKey_board, idKey_board_ydj, idKey_board_lbc, idKey_tj, idKey_gh]);
 			}
+			
 		}
 		
 	}

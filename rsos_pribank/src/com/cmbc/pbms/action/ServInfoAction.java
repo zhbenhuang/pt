@@ -129,6 +129,12 @@ public class ServInfoAction extends BaseAction {
 			String alterTime_DateTimeString = CalendarUtil.formatDatetime(new Date(), CalendarUtil.DATEFORMAT_YYYYMMDD_HHmmss);
 			String alterTime = alterTime_DateTimeString;//getHttpRequest().getParameter("alterTime");
 			
+			if(begTime!=null && endTime!=null && begTime.compareTo(endTime) > 0){
+				log.error("when add, begTime can not bigger than endTime");
+				writeErrors(Constants.RETCODE_999999);
+				return ;
+			}
+			
 			PbmsServInfo oldServInfo = servInfoService.findServInfo(serId+"");
 			if(oldServInfo!=null){
 				EasyResult result = new EasyResult(Constants.RETCODE_000022,getText(Constants.RETCODE_000022));
@@ -240,6 +246,12 @@ public class ServInfoAction extends BaseAction {
 				writeErrors(Constants.RETCODE_999999);
 				return ;
 			}
+			if(begTime!=null && endTime!=null && begTime.compareTo(endTime) > 0){
+				log.error("when add, begTime can not bigger than endTime");
+				writeErrors(Constants.RETCODE_999999);
+				return ;
+			}
+			
 			servInfo.setSerId(Integer.parseInt(serId));
 			servInfo.setSerName(serName);
 			servInfo.setSerDes(serDes);
